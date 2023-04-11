@@ -1,7 +1,7 @@
 from server_template import Server
 
 
-DEFAULT_PATH = "/Index.html"
+DEFAULT_PATH = "index.html"
 
 
 class SudokuServer(Server):
