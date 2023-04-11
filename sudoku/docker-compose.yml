@@ -8,3 +8,5 @@ services:
       - .:/sudoku_server
     environment:
       FLASK_DEBUG: "true"
+  redis:
+    image: "redis:alpine"

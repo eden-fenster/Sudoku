@@ -3,7 +3,6 @@ import logging
 import sys
 from typing import List
 
-import redis
 from flask import *
 
 import sudoku
