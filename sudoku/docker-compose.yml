@@ -2,7 +2,7 @@ version: "3.9"
 services:
   web:
     build: .
-    image: "localhost:5000/sudoku_server"
+    image: "edenfenster/sudoku_server"
     ports:
       - "5000:5000"
     volumes:
@@ -10,6 +10,8 @@ services:
       - logvolume01:/var/log
     environment:
       FLASK_DEBUG: "true"
+    depends_on:
+      - redis
   redis:
     image: "redis:alpine"
 volumes:
