@@ -1,23 +1,30 @@
 # syntax=docker/dockerfile:1
 
-# Enviorment
-FROM python:3.10.6
+# Pull base image
+FROM python:3.10.6-slim
 
-# Directory
-WORKDIR /sudoku_server
+# Get some custom packages
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    make \
+    gcc \
+    python3-dev \
+    mongodb
 
-# Copying all files.
-COPY . .
+## make local directory \
+RUN mkdir /sudoku-api
 
-# Defining app and host.
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
+# set as working directory
+WORKDIR /sudoku-api
 
-# Installing dependencies.
-RUN pip install --no-cache-dir  -r requirements-prod.txt
+# copy files to /code
+ADD . .
 
-# Exposing port.
+# pip install requirements
+RUN pip install -r requirements-prod.txt
+
+# Listen to port 5000
 EXPOSE 5000
 
-# Run.
-CMD ["flask", "run"]
+# start
+CMD python manage.py runserver

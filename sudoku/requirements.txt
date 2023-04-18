@@ -1,3 +1,7 @@
 Flask
-redis
-python-dotenv
+Flask-Script
+pymongo
+mongoengine
+flask-mongoengine
+py-bcrypt
+jsonschema

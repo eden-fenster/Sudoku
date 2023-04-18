@@ -6,13 +6,12 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - .:/sudoku_server
-      - logvolume01:/var/log
-    environment:
-      FLASK_DEBUG: "true"
+      - /sudoku-api:/sudoku-api
+    links:
+      - db:mongodb
+    container_name: sudokuapi_web_1
     depends_on:
-      - redis
-  redis:
-    image: "redis:alpine"
-volumes:
-  logvolume01: { }
+      - db
+  db:
+    image: mongo
+    container_name: sudokuapi_db_1
