@@ -1,20 +1,23 @@
 # syntax=docker/dockerfile:1
 
+# Enviorment
 FROM python:3.10.6
 
+# Directory
 WORKDIR /sudoku_server
 
+# Copying all files.
+COPY . .
+
+# Defining app and host.
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
-RUN apk add --no-cache gcc musl-dev linux-headers
+# Installing dependencies.
+RUN pip install --no-cache-dir  -r requirements-prod.txt
 
-COPY requirements.txt requirements.txt
-
-RUN pip3 install -r requirements.txt
-
+# Exposing port.
 EXPOSE 5000
 
-COPY . .
-
+# Run.
 CMD ["flask", "run"]

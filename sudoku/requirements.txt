@@ -1,7 +1,3 @@
 Flask
 redis
-MarkupSafe
-Werkzeug
-itsdangerous
-Jinja2
-click
+python-dotenv
