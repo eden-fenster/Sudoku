@@ -1,23 +1,25 @@
-#!/usr/bin/env python3
 import logging
 import sys
 from typing import List
 
-from flask import *
+from flask import Flask, request, render_template
+from flask_restful import Resource, Api
 
 import sudoku
 
+# create an instance of flask
 app = Flask(__name__)
+# creating an API object
+api = Api(app)
 
+# For GET request to http://localhost:5000/
+class GetFromUser(Resource):
+    def get(self):
+        return render_template('upload.html')
 
-@app.route('/')
-def upload_file():
-    return render_template('upload.html')
-
-
-@app.route('/results', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
+# For Post request to http://localhost:5000/results
+class PrintResults(Resource):
+    def post(self):
         f = request.files['file']
         f.save(f.filename)
         read_file: List[str] = sudoku.read_file(file_to_open=f.filename)
@@ -32,8 +34,12 @@ def index():
             solved_grid_string += sudoku.print_grid(description=f"solution {i + 1}", grid=solution)
 
         return "The initial grid: <br>" + initial_grid_string + "<br>The solved grid: <br>" + solved_grid_string
-    return "Fail"
 
 
+
+api.add_resource(GetFromUser, '/')
+api.add_resource(PrintResults, '/results')
+
+#
 if __name__ == '__main__':
     app.run(debug=True)
