@@ -6,12 +6,10 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - /sudoku-api:/sudoku-api
-    links:
-      - db:mongodb
-    container_name: sudokuapi_web_1
+      - .:/sudoku_server
+    container_name: sudokuserver_web_1
     depends_on:
-      - db
-  db:
-    image: mongo
-    container_name: sudokuapi_db_1
+      - redis
+  redis:
+    image: redis
+    container_name: sudokuserver_redis
