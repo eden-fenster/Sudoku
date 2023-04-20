@@ -16,6 +16,8 @@ api = Api(app)
 class GetFromUser(Resource):
     def get(self):
         return render_template('upload.html')
+    def post(self):
+        return {'data': 'posted'}
 
 # For Post request to http://localhost:5000/results
 class PrintResults(Resource):
@@ -33,7 +35,9 @@ class PrintResults(Resource):
         for i, solution in enumerate(solutions):
             solved_grid_string += sudoku.print_grid(description=f"solution {i + 1}", grid=solution)
 
-        return "The initial grid: <br>" + initial_grid_string + "<br>The solved grid: <br>" + solved_grid_string
+        dict_sudoku: dict = {{"The initial grid: <br>": initial_grid_string},
+                           {"<br>The solved grid: <br>" + solved_grid_string}}
+        return dict_sudoku
 
 
 
