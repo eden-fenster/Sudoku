@@ -2,7 +2,7 @@
 # Gets from user a 9 x 9 board.
 import logging
 import sys
-from typing import List
+from typing import List, Tuple
 import argparse
 from sudoku_class import solve_sudoku
 
@@ -37,6 +37,12 @@ def print_grid(description: str, grid: List[List[int]]) -> str:
         grid_string += ' '.join(grid_line_converted) + "<br>"
         logging.debug(f"The grid so far is \n {grid_string}")
     return grid_string
+
+def get_solutions(initial_grid: List[List[int]]) -> Tuple[List[List[int]]]:
+    solutions, have_solution, information = solve_sudoku(grid=initial_grid)
+    _ = have_solution
+    _ = information
+    return solutions
 
 def main():
     args = get_args()

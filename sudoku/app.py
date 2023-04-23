@@ -26,13 +26,16 @@ def index():
             sys.exit(1)
         initial_grid: List[List[int]] = sudoku.create_sudoku(read_file)
         initial_grid_string = sudoku.print_grid(description="Initial grid", grid=initial_grid)
-        solutions, have_solution, information = sudoku.solve_sudoku(grid=initial_grid)
+        solutions = sudoku.get_solutions(initial_grid=initial_grid)
         solved_grid_string: str = ''
         for i, solution in enumerate(solutions):
             solved_grid_string += sudoku.print_grid(description=f"solution {i + 1}", grid=solution)
 
-        return "The initial grid: <br>" + initial_grid_string + "<br>The solved grid: <br>" + solved_grid_string
-    return "Fail"
+        sudoku_json: str = 'The initial grid: <br>' + initial_grid_string +\
+                           '<br>The solved grid: <br>' + solved_grid_string
+
+        return json.dumps(sudoku_json)
+    return json.dumps({"Fail"})
 
 
 if __name__ == '__main__':

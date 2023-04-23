@@ -1,8 +1,9 @@
+import json
 import logging
 import sys
 from typing import List, Tuple
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from flask_restful import Resource, Api
 
 import sudoku
@@ -45,9 +46,11 @@ class PrintResults(Resource):
         for i, solution in enumerate(solutions):
             solved_grid_string += sudoku.print_grid(description=f"solution {i + 1}", grid=solution)
 
-        dict_sudoku = {{"The initial grid: <br>": initial_grid_string},
-                       {"<br>The solved grid: <br>" + solved_grid_string}}
-        return dict_sudoku
+        sudoku_json: str = 'The initial grid: <br>' + initial_grid_string + \
+                           '<br>The solved grid: <br>' + solved_grid_string
+
+        return json.dumps(sudoku_json)
+
 
 
 api.add_resource(GetFromUser, '/')
