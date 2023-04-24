@@ -9,7 +9,7 @@ from flask import *
 
 import sudoku
 
-sudoku_server = Blueprint('sudoku_server', __name__)
+sudoku_server = Flask( __name__)
 
 
 @sudoku_server.route('/')
