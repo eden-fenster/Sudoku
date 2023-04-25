@@ -1,9 +1,7 @@
 version: "3.9"
 services:
   web:
-    build:
-      dockerfile: Dockerfile
-      context: ./web
+    build: .
     image: "edenfenster/sudoku_server"
     ports:
       - "5000:5000"
@@ -11,9 +9,7 @@ services:
       - .:/sudoku_server
     container_name: sudoku_web_1
   processor:
-    build:
-      dockerfile: Dockerfile
-      context: ./processor
+    build: .
     image: "edenfenster/sudoku_processor"
     ports:
       - "8000:8000"

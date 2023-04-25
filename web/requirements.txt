@@ -1,5 +1,6 @@
 click
 Flask
+flask_restful
 redis
 itsdangerous
 Jinja2

@@ -2,7 +2,7 @@
 import logging
 import sys
 from typing import List
-from processor.app import app
+from processor.app import GetResults
 
 
 from flask import *
@@ -27,7 +27,7 @@ def index():
             logging.error(f"No sudoku found")
             sys.exit(1)
         initial_grid: List[List[int]] = sudoku.create_sudoku(read_file)
-        return app.route.sudoku_slover(initial_grid=initial_grid)
+        return GetResults.get(initial_grid=initial_grid)
 
 
 if __name__ == '__main__':
