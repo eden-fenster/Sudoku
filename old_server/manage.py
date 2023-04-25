@@ -2,7 +2,7 @@
 import os
 import sys
 from flask import Manager, Server
-from application import create_app
+from old_server.application import create_app
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '')))
 app = create_app()

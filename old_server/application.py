@@ -1,6 +1,6 @@
 from flask import *
-from web import app1
-from processor import app2
+from web import app
+from processor import app
 
 app = Flask(__name__)
 def create_app():

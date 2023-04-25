@@ -5,11 +5,11 @@ from flask import *
 
 import sudoku
 
-sudoku_processor = Flask(__name__)
+app = Flask(__name__)
 
 
 
-@sudoku_processor.route('/results', methods=['GET', 'POST'])
+@app.route('/results/<initial_grid>', methods=['GET', 'POST'])
 def sudoku_solver(initial_grid: List[List[int]]):
     if request.method == 'POST':
         initial_grid_string = sudoku.print_grid(description="Initial grid", grid=initial_grid)
@@ -26,4 +26,4 @@ def sudoku_solver(initial_grid: List[List[int]]):
 
 
 if __name__ == '__main__':
-    sudoku_processor.run(debug=True)
+    app.run(debug=True)
