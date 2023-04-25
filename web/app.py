@@ -7,7 +7,7 @@ from processor.app import GetResults
 
 from flask import *
 
-import sudoku
+import web.sudoku
 
 app = Flask( __name__)
 
@@ -22,11 +22,11 @@ def index():
     if request.method == 'POST':
         f = request.files['file']
         f.save(f.filename)
-        read_file: List[str] = sudoku.read_file(file_to_open=f.filename)
+        read_file: List[str] = web.sudoku.read_file(file_to_open=f.filename)
         if not read_file:
             logging.error(f"No sudoku found")
             sys.exit(1)
-        initial_grid: List[List[int]] = sudoku.create_sudoku(read_file)
+        initial_grid: List[List[int]] = web.sudoku.create_sudoku(read_file)
         return GetResults.get(initial_grid=initial_grid)
 
 
