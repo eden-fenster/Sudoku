@@ -12,6 +12,9 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-COPY . .
+COPY app.py .
+COPY sudoku.py .
+COPY sudoku_class.py .
+
 
 CMD ["flask", "run"]

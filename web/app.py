@@ -9,7 +9,7 @@ from flask import *
 
 import web.sudoku
 
-app = Flask( __name__)
+app = Flask(__name__)
 
 
 @app.route('/')
