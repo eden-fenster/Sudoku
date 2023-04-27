@@ -19,7 +19,7 @@ api = Api(app)
 # For GET request to http://localhost:5000/
 class GetFromUser(Resource):
     def get(self):
-        return render_template('upload.JSON')
+        date = json.dumps(render_template('upload.JSON'))
 
     def post(self):
         return {'data': 'posted'}

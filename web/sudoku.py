@@ -1,26 +1,11 @@
 #!/usr/bin/env python3
 # Gets from user a 9 x 9 board.
 import logging
-import sys
 from typing import List, Tuple
-import argparse
 from web.sudoku_class import solve_sudoku
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
-
-# Check if all numbers are between 1 - n.
-# If no, fail.
-# If yes, check for each row, col and k * l sub-table.
-# Check that each number doesn't appear more than once at the 3 things above.
-def get_args():
-    # Getting a file that contains a partially filled sudoku from the command line.
-    parser = argparse.ArgumentParser \
-        (description='Sudoku', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('file', metavar='file', help='Input file')
-    args = parser.parse_args()
-
-    return args
 
 def dump_grid(description: str, grid: List[List[int]]) -> None:
     print(description)
@@ -43,20 +28,6 @@ def get_solutions(initial_grid: List[List[int]]) -> Tuple[List[List[int]]]:
     _ = have_solution
     _ = information
     return solutions
-
-def main():
-    args = get_args()
-    logging.debug(f"We have arguments of {args}")
-    file_to_open: str = args.file
-    list_of_lines: List[str] = read_file(file_to_open=file_to_open)
-    if not list_of_lines:
-        logging.error(f"No sudoku found")
-        sys.exit(1)
-    initial_grid: List[List[int]] = create_sudoku(list_of_lines)
-    dump_grid(description="Initial grid", grid=initial_grid)
-    solutions, have_solution, information = solve_sudoku(grid=initial_grid)
-    for i, solution in enumerate(solutions):
-        dump_grid(description=f"solution {i + 1}", grid=solution)
 
 
 # Reads in a file
@@ -94,6 +65,3 @@ def create_sudoku(list_of_lines: List[str]) -> List[List[int]]:
         sudoku.append(sudoku_line)
     return sudoku
 
-
-if __name__ == "__main__":
-    main()
