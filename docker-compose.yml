@@ -1,7 +1,8 @@
 version: "3.9"
 services:
   web:
-    build: .
+    build:
+      context: ./web
     image: "edenfenster/sudoku_server"
     ports:
       - "5000:5000"
@@ -9,7 +10,8 @@ services:
       - .:/sudoku_server
     container_name: sudoku_web_1
   processor:
-    build: .
+    build:
+      context: ./processor
     image: "edenfenster/sudoku_processor"
     ports:
       - "8000:8000"
