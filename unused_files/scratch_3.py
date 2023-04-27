@@ -17,12 +17,10 @@ api = Api(app)
 
 
 # For GET request to http://localhost:5000/
-class GetFromUser(Resource):
-    def get(self):
-        date = json.dumps(render_template('upload.JSON'))
+@app.route('/')
+def upload_file():
+    return render_template('upload.html')
 
-    def post(self):
-        return {'data': 'posted'}
 
 
 # For Post request to http://localhost:5000/results
@@ -39,7 +37,7 @@ class PrintResults(Resource):
 
 
 
-api.add_resource(GetFromUser, '/')
+api.add_resource(upload_file, '/')
 api.add_resource(PrintResults, '/results')
 
 #
