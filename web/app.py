@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import logging
 import sys
-from typing import List, Tuple
+from typing import List
 
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template
 from flask_restful import Resource, Api
-from processor.app import GetResults
+import requests
 
 import sudoku
 
@@ -32,7 +32,8 @@ class PrintResults(Resource):
             logging.error(f"No sudoku found")
             sys.exit(1)
         initial_grid: List[List[int]] = sudoku.create_sudoku(read_file)
-        return GetResults.get(initial_grid=initial_grid)
+        response = requests.get("http://localhost:8000", json=initial_grid)
+        return response.json()
 
 
 
@@ -40,4 +41,4 @@ api.add_resource(PrintResults, '/results')
 
 #
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)

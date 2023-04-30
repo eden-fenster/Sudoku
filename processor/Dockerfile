@@ -16,4 +16,4 @@ COPY app.py .
 COPY sudoku.py .
 COPY sudoku_class.py .
 
-CMD ["flask", "run"]
+CMD ["flask", "run", "-p", "8000"]

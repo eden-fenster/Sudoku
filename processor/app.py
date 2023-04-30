@@ -22,14 +22,14 @@ def sudoku_solver(initial_grid: List[List[int]]):
 
     return json.dumps(sudoku_json)
 
-
+# For Post request to http://localhost:8000
 class GetResults(Resource):
     def get(initial_grid: List[List[int]]):
         return_object: str = sudoku_solver(initial_grid=initial_grid)
-        return make_response(return_object)
+        return jsonify(return_object)
 
 
 api.add_resource(GetResults, '/')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8000)
