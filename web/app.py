@@ -32,6 +32,7 @@ class PrintResults(Resource):
             logging.error(f"No sudoku found")
             sys.exit(1)
         initial_grid: List[List[int]] = sudoku.create_sudoku(read_file)
+        # Send parameter to processor.
         response = requests.post("http://localhost:5000/print", json=initial_grid)
         return response.json()
 
