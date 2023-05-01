@@ -1,35 +1,35 @@
 #!/usr/bin/env python3
+import logging
 from typing import List
 
 from flask import *
 from flask_restful import *
 
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 import processor.sudoku
 
 app = Flask(__name__)
-api = Api(app)
 
-
-def sudoku_solver(initial_grid: List[List[int]]):
-    initial_grid_string = processor.sudoku.print_grid(description="Initial grid", grid=initial_grid)
-    solutions = processor.sudoku.get_solutions(initial_grid=initial_grid)
+# For Post request to http://localhost:8000
+@app.route('/print', methods = ['GET', 'POST'])
+def sudoku_solver():
+    # TODO: Issue with receiving parameter from web.
+    # TODO: Issue with connecting to localhost:8000
+    input_json = request.get_json(force=True)
+    logging.debug(f"The initial grid {input_json}")
+    initial_grid_string = processor.sudoku.print_grid(description="Initial grid", grid=input_json)
+    logging.debug(f"The initial grid string{initial_grid_string}")
+    solutions = processor.sudoku.get_solutions(initial_grid=input_json)
+    logging.debug(f"The solution {solutions}")
     solved_grid_string: str = ''
     for i, solution in enumerate(solutions):
         solved_grid_string += processor.sudoku.print_grid(description=f"solution {i + 1}", grid=solution)
-
+    logging.debug(f"Solved grid {solved_grid_string}")
     sudoku_json: str = 'The initial grid: <br>' + initial_grid_string + \
                        '<br>The solved grid: <br>' + solved_grid_string
 
-    return json.dumps(sudoku_json)
+    return jsonify(sudoku_json)
 
-# For Post request to http://localhost:8000
-class GetResults(Resource):
-    def get(initial_grid: List[List[int]]):
-        return_object: str = sudoku_solver(initial_grid=initial_grid)
-        return jsonify(return_object)
-
-
-api.add_resource(GetResults, '/')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(debug=True)
