@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
+import json
 import logging
 import sys
 from typing import List
 
 from flask import Flask, request, render_template
-from flask_restful import Resource, Api
 import requests
 
 import sudoku
