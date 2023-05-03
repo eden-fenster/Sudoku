@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import logging
 import re
 
 import processor.sudoku
@@ -29,6 +30,10 @@ def add_grids():
     solved_string: str = ''
     for i, solve in enumerate(solved):
         solved_string += processor.sudoku.print_grid(description=f"solution {i + 1}", grid=solve)
+    # Clears list from previous attempts
+    grid_strings.clear()
+    # Add to list.
+    logging.debug(f"Adding {solved_string} to list")
     grid_strings.append("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string)
     return '', 204
 
