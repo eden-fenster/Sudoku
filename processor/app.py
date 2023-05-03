@@ -14,7 +14,7 @@ grid_strings = []
 @app.route('/grids')
 def get_grids():
     # Turning grid into a string.
-    results= json.dumps(grid_strings)
+    results = json.dumps(grid_strings)
     formatted_grids = re.sub(r"[\[\]]","",results)
     return json.dumps(formatted_grids)
 
