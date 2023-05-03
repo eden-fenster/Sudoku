@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 import json
+import re
+
 import processor.sudoku
 from flask import Flask, request
 app = Flask(__name__)
@@ -11,7 +13,11 @@ grid_strings = []
 
 @app.route('/grids')
 def get_grids():
-    return json.dumps(grid_strings)
+    # Turning grid into a string.
+    results= json.dumps(grid_strings)
+    formatted_grids = re.sub("[[]]","",results)
+    return json.dumps(formatted_grids)
+
 
 
 @app.route('/grids', methods=['POST'])

@@ -1,6 +1,7 @@
 click
 Flask
 flask_restful
+jsonify
 requests
 redis
 itsdangerous
