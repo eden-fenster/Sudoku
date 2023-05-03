@@ -5,7 +5,6 @@ services:
       - processor
     build:
       context: ./web
-    image: "edenfenster/sudoku_server"
     ports:
       - "5000:5000"
     volumes:
@@ -16,7 +15,6 @@ services:
   processor:
     build:
       context: ./processor
-    image: "edenfenster/sudoku_processor"
     ports:
       - "8000:8000"
     volumes:

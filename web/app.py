@@ -3,11 +3,10 @@ import json
 import logging
 import sys
 from typing import List
-
+import web.sudoku
 from flask import Flask, request, render_template
 import requests
 
-import sudoku
 
 # create an instance of flask
 app = Flask(__name__)
@@ -25,14 +24,14 @@ def upload_file():
 def post():
     f = request.files['file']
     f.save(f.filename)
-    read_file: List[str] = sudoku.read_file(file_to_open=f.filename)
+    read_file: List[str] = web.sudoku.read_file(file_to_open=f.filename)
     if not read_file:
         logging.error(f"No sudoku found")
         sys.exit(1)
-    initial_grid: List[List[int]] = sudoku.create_sudoku(read_file)
+    initial_grid: List[List[int]] = web.sudoku.create_sudoku(read_file)
     # Send parameter to processor.
-    requests.post("http://localhost:8000/grids", json={"Grid": initial_grid})
-    get_response = requests.get("http://localhost:8000/grids")
+    requests.post("http://172.23.0.1:8000/grids", json={"Grid": initial_grid})
+    get_response = requests.get("http://172.23.0.1:8000/grids")
     return get_response.json()
 
 #

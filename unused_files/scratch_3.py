@@ -8,7 +8,7 @@ from flask import Flask, request, render_template, jsonify
 from flask_restful import Resource, Api
 from processor.app import GetResults
 
-import sudoku
+import not_for_containers
 
 # create an instance of flask
 app = Flask(__name__)
@@ -28,11 +28,11 @@ class PrintResults(Resource):
     def post(self):
         f = request.files['file']
         f.save(f.filename)
-        read_file: List[str] = sudoku.read_file(file_to_open=f.filename)
+        read_file: List[str] = not_for_containers.read_file(file_to_open=f.filename)
         if not read_file:
             logging.error(f"No sudoku found")
             sys.exit(1)
-        initial_grid: List[List[int]] = sudoku.create_sudoku(read_file)
+        initial_grid: List[List[int]] = not_for_containers.create_sudoku(read_file)
         return GetResults.get(initial_grid=initial_grid)
 
 

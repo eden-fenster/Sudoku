@@ -17,5 +17,4 @@ COPY app.py .
 COPY sudoku.py .
 COPY sudoku_class.py .
 
-CMD ["telnet", "localhost", "8000"]
 CMD ["flask", "run"]

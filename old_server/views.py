@@ -4,7 +4,7 @@ from typing import List
 
 from flask import *
 
-from sudoku import sudoku
+from not_for_containers import sudoku
 
 sudoku_app = Blueprint('sudoku_app', __name__)
 

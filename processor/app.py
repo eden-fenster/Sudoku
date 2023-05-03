@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 import json
-
-from flask import Flask, jsonify, request
-import sudoku
+import processor.sudoku
+from flask import Flask, request
 app = Flask(__name__)
 
 # Initial grid string will be done in web.
@@ -19,11 +18,11 @@ def get_grids():
 def add_grids():
     grids.append(request.get_json())
     initial_grid = grids[0]["Grid"]
-    initial_string: str = sudoku.print_grid(description="Initial grid", grid=initial_grid)
-    solved = sudoku.get_solutions(initial_grid=initial_grid)
+    initial_string: str = processor.sudoku.print_grid(description="Initial grid", grid=initial_grid)
+    solved = processor.sudoku.get_solutions(initial_grid=initial_grid)
     solved_string: str = ''
     for i, solve in enumerate(solved):
-        solved_string += sudoku.print_grid(description=f"solution {i + 1}", grid=solve)
+        solved_string += processor.sudoku.print_grid(description=f"solution {i + 1}", grid=solve)
     grid_strings.append("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string)
     return '', 204
 
