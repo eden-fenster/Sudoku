@@ -37,5 +37,11 @@ def add_grids():
     grid_strings.append("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string)
     return '', 204
 
+@app.route('/grids', methods=['DELETE'])
+def delete_grids():
+    grids.clear()
+    grid_strings.clear()
+    return '', 204
+
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

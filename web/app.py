@@ -29,6 +29,8 @@ def post():
         logging.error(f"No sudoku found")
         sys.exit(1)
     initial_grid: List[List[int]] = web.sudoku.create_sudoku(read_file)
+    # Delete previous records.
+    requests.delete("http://172.23.0.1:8000/grids")
     # Send parameter to processor.
     requests.post("http://172.23.0.1:8000/grids", json={"Grid": initial_grid})
     get_response = requests.get("http://172.23.0.1:8000/grids")
