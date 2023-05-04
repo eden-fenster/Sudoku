@@ -2,19 +2,19 @@
 
 FROM python:3.10.6
 
-WORKDIR /sudoku_server
+WORKDIR /sudoku_web
 
 ENV FLASK_APP=web/app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
-COPY requirements.txt requirements.txt
+COPY web/requirements.txt requirements.txt
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-COPY app.py .
-COPY sudoku.py .
-COPY sudoku_class.py .
+COPY web/app.py .
+COPY web/sudoku.py .
+COPY web/sudoku_class.py .
 
 CMD ["flask", "run"]

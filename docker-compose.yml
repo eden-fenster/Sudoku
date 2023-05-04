@@ -4,17 +4,17 @@ services:
     depends_on:
       - processor
     build:
-      context: ./web
+      dockerfile: web/Dockerfile
     ports:
       - "5000:5000"
     volumes:
-      - .:/sudoku_server
+      - .:/sudoku_web
     container_name: sudoku_web_1
     networks:
       - sudoku_network
   processor:
     build:
-      context: ./processor
+      dockerfile: processor/Dockerfile
     ports:
       - "8000:8000"
     volumes:

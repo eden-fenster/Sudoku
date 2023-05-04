@@ -7,14 +7,14 @@ WORKDIR /sudoku_processor
 ENV FLASK_APP=processor/app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
-COPY requirements.txt requirements.txt
+COPY processor/requirements.txt requirements.txt
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
-COPY app.py .
-COPY sudoku.py .
-COPY sudoku_class.py .
+COPY processor/app.py .
+COPY processor/sudoku.py .
+COPY processor/sudoku_class.py .
 
 CMD ["flask", "run", "-p", "8000"]
