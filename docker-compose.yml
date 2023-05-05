@@ -11,7 +11,8 @@ services:
       - .:/sudoku_web
     container_name: sudoku_web_1
     networks:
-      - sudoku_network
+      sudoku_network:
+        ipv4_address: 172.23.0.2
   processor:
     build:
       dockerfile: processor/Dockerfile
@@ -21,8 +22,13 @@ services:
       - .:/sudoku_processor
     container_name: sudoku_processor_1
     networks:
-     - sudoku_network
+     sudoku_network:
+       ipv4_address: 172.23.0.3
 networks:
   sudoku_network:
-    external: true
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.23.0.0/16
+         gateway: 172.23.0.1
 
