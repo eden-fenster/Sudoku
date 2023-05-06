@@ -4,7 +4,6 @@ services:
     depends_on:
       - processor
     build:
-      context: .
       dockerfile: web/Dockerfile
     ports:
       - "5000:5000"
@@ -16,7 +15,6 @@ services:
         ipv4_address: 172.23.0.2
   processor:
     build:
-      context: .
       dockerfile: processor/Dockerfile
     ports:
       - "8000:8000"
