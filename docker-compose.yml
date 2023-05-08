@@ -5,25 +5,25 @@ services:
       - processor
     build:
       dockerfile: web/Dockerfile
+      args:
+        WEB_IP: ${WEB_IP}
     ports:
       - "5000:5000"
     volumes:
       - .:/sudoku_web
     container_name: sudoku_web_1
-    networks:
-      sudoku_network:
-        ipv4_address: 172.23.0.2
+
   processor:
     build:
       dockerfile: processor/Dockerfile
+      args:
+        PROCESSOR_IP: ${PROCESSOR_IP}
     ports:
       - "8000:8000"
     volumes:
       - .:/sudoku_processor
     container_name: sudoku_processor_1
-    networks:
-     sudoku_network:
-       ipv4_address: 172.23.0.3
+
 networks:
   sudoku_network:
     driver: bridge

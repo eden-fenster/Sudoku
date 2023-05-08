@@ -6,6 +6,12 @@ from typing import List
 import web.sudoku
 from flask import Flask, request, render_template
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+PROCESSOR_IP = os.getenv('PROCESSOR_IP')
 
 
 # create an instance of flask
@@ -22,18 +28,22 @@ def upload_file():
 # For Post request to http://localhost:5000/results
 @app.route('/results', methods=['GET', 'POST'])
 def post():
+    # Gets the file and saves it.
     f = request.files['file']
     f.save(f.filename)
+    # Reads the file, exit if it's an invalid file.
     read_file: List[str] = web.sudoku.read_file(file_to_open=f.filename)
     if not read_file:
-        logging.error(f"No sudoku found")
+        logging.error("No sudoku found")
         sys.exit(1)
+    # Convert to a grid.
     initial_grid: List[List[int]] = web.sudoku.create_sudoku(read_file)
     # Delete previous records.
-    requests.delete("http://172.23.0.3:8000/grids")
+    requests.delete("http://PROSESSOR_IP:8000/grids")
     # Send parameter to processor.
-    requests.post("http://172.23.0.3:8000/grids", json={"Grid": initial_grid})
-    get_response = requests.get("http://172.23.0.3:8000/grids")
+    requests.post("http://PROSESSOR_IP:8000/grids", json={"Grid": initial_grid})
+    get_response = requests.get("http://PROCESSOR_IP:8000/grids")
+    # Return response.
     return get_response.json()
 
 #

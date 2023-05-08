@@ -7,16 +7,18 @@ import processor.sudoku
 from flask import Flask, request
 app = Flask(__name__)
 
-# Initial grid string will be done in web.
+# List to store received grid.
 grids = []
+# List to store the returned results.
 grid_strings = []
 
-
+# Returns the results
 @app.route('/grids')
 def get_grids():
     # Turning grid into a string.
     results = json.dumps(grid_strings)
     formatted_grids = re.sub(r"[\[\]]","",results)
+    # Return results.
     return json.dumps(formatted_grids)
 
 
