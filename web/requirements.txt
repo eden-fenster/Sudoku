@@ -1,7 +1,5 @@
 click
 Flask
-flask_restful
-python-dotenv
 jsonify
 requests
 redis
