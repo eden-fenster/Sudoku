@@ -4,11 +4,17 @@
     <title>Sudoku Solver Server</title>
 </head>
    <body>
+      <h2 id="this-web-page-will-solve-your-sudoku-for-you-">This web page will solve your sudoku for you !</h2>
+      <h4 id="steps-">Steps:</h4>
+      <h4 id="1-upload-a-text-file-that-has-an-unsolved-sudoku-in-it-">1. Upload a text file that has an unsolved sudoku in it here.</h4>
       <form action = "http://localhost:5000/results" method = "POST"
          enctype = "multipart/form-data">
-         <p>Welcome to the Sudoku Solver server, upload a file.</p>
          <input type = "file" name = "file" accept=".txt"/>
          <input type = "submit" value="Upload"/>
       </form>
+      <h4 id="2-wait-">2. Wait.</h4>
+      <h4 id="3-enjoy-your-solved-sudoku-">3. Enjoy your solved sudoku.</h4>
+
+
    </body>
 </html>
