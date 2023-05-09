@@ -39,6 +39,7 @@ def add_grids():
     grid_strings.append("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string)
     return '', 204
 
+# Delete previous records.
 @app.route('/grids', methods=['DELETE'])
 def delete_grids():
     grids.clear()

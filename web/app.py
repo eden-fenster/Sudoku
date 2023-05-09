@@ -6,12 +6,6 @@ from typing import List
 import web.sudoku
 from flask import Flask, request, render_template
 import requests
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-PROCESSOR_IP = os.getenv('PROCESSOR_IP')
 
 
 # create an instance of flask
@@ -39,10 +33,10 @@ def post():
     # Convert to a grid.
     initial_grid: List[List[int]] = web.sudoku.create_sudoku(read_file)
     # Delete previous records.
-    requests.delete("http://PROSESSOR_IP:8000/grids")
+    requests.delete("http://172.23.0.3:8000/grids")
     # Send parameter to processor.
-    requests.post("http://PROSESSOR_IP:8000/grids", json={"Grid": initial_grid})
-    get_response = requests.get("http://PROCESSOR_IP:8000/grids")
+    requests.post("http://172.23.0.3:8000/grids", json={"Grid": initial_grid})
+    get_response = requests.get("http://172.23.0.3:8000/grids")
     # Return response.
     return get_response.json()
 
