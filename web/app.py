@@ -33,13 +33,13 @@ def post():
     # Convert to a grid.
     initial_grid: List[List[int]] = web.sudoku.create_sudoku(read_file)
     # Delete previous records.
-    requests.delete("http://172.23.0.3:8000/grids")
+    requests.delete("http://sudoku_processor:8000/grids")
     # Send parameter to processor.
-    requests.post("http://172.23.0.3:8000/grids", json={"Grid": initial_grid})
-    get_response = requests.get("http://172.23.0.3:8000/grids")
+    requests.post("http://sudoku_processor:8000/grids", json={"Grid": initial_grid})
+    get_response = requests.get("http://sudoku_processor:8000/grids")
     # Return response.
     return get_response.json()
 
 #
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000, host='sudoku_web')

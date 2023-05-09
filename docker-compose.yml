@@ -9,10 +9,12 @@ services:
       - "5000:5000"
     volumes:
       - .:/sudoku_web
-    container_name: sudoku_web_1
+    container_name: sudoku_web
+    hostname: sudoku_web
     networks:
       sudoku_network:
-        - ipv4_address: 172.23.0.2
+        ipv4_address: 172.23.0.2
+
 
   processor:
     build:
@@ -21,10 +23,12 @@ services:
       - "8000:8000"
     volumes:
       - .:/sudoku_processor
-    container_name: sudoku_processor_1
+    container_name: sudoku_processor
+    hostname: sudoku_processor
     networks:
       sudoku_network:
-        - ipv4_address: 172.23.0.3
+        ipv4_address: 172.23.0.3
+
 
 networks:
   sudoku_network:

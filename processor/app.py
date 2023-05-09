@@ -47,4 +47,4 @@ def delete_grids():
     return '', 204
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(debug=True, port=8000, host='sudoku_processor')
