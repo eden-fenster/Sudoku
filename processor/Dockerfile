@@ -13,8 +13,7 @@ RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
-COPY processor/app.py .
-COPY processor/sudoku.py .
-COPY processor/sudoku_class.py .
+
+COPY processor/*.py /sudoku_processor/processor/
 
 CMD ["flask", "run", "-p", "8000"]

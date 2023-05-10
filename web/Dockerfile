@@ -13,8 +13,8 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-COPY web/app.py .
-COPY web/sudoku.py .
-COPY web/sudoku_class.py .
+
+COPY web/*.py /sudoku_web/web/
+COPY web/templates/upload.html /sudoku_web/web/templates/
 
 CMD ["flask", "run"]
