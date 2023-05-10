@@ -37,7 +37,8 @@ def post():
     requests.post("http://sudoku_processor:8000/grids", json={"Grid": initial_grid})
     get_response = requests.get("http://sudoku_processor:8000/grids")
     # Return response.
-    return get_response.json()
+    response = get_response.json()
+    return render_template('index.html', page_paragraph = response)
 
 #
 if __name__ == '__main__':
