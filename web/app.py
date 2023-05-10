@@ -38,7 +38,8 @@ def post():
     get_response = requests.get("http://sudoku_processor:8000/grids")
     # Return response.
     response = get_response.json()
-    return render_template('index.html', page_paragraph = response)
+
+    return render_template('style.html', return_content=response)
 
 #
 if __name__ == '__main__':

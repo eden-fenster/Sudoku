@@ -17,4 +17,5 @@ EXPOSE 5000
 COPY web/*.py /sudoku_web/web/
 COPY web/templates/*.html /sudoku_web/web/templates/
 
+
 CMD ["flask", "run"]
