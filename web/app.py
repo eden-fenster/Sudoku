@@ -21,7 +21,10 @@ def upload_file():
 def post():
     # Gets the file and saves it.
     f = request.files['file']
+    if f.filename is '':
+        return render_template('style.html') + render_template_string("No Grid has been provided")
     f.save(f.filename)
+    logging.debug(f"The file is {f}")
     # Reads the file, exit if it's an invalid file.
     read_file: List[str] = web.sudoku.read_file(file_to_open=f.filename)
     if not read_file:

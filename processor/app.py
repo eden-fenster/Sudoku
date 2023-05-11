@@ -4,7 +4,7 @@ import logging
 import re
 
 import processor.sudoku
-from flask import Flask, request, redirect
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -13,12 +13,6 @@ grids = []
 # List to store the returned results.
 grid_strings = []
 
-
-# If at home page, redirect.
-
-@app.route('/')
-def grids():
-    return redirect('http://sudoku_processor:8000/grids')
 
 
 # Returns the results
