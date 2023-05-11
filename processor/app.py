@@ -18,7 +18,7 @@ grid_strings = []
 
 @app.route('/')
 def grids():
-    return redirect('http://sudoku_processor:8000')
+    return redirect('http://sudoku_processor:8000/grids')
 
 
 # Returns the results
