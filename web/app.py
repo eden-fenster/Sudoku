@@ -3,9 +3,8 @@ import logging
 import sys
 from typing import List
 import web.sudoku
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, render_template_string
 import requests
-
 
 # create an instance of flask
 app = Flask(__name__)
@@ -15,7 +14,6 @@ app = Flask(__name__)
 @app.route('/')
 def upload_file():
     return render_template('upload.html')
-
 
 
 # For Post request to http://localhost:5000/results
@@ -38,8 +36,8 @@ def post():
     get_response = requests.get("http://sudoku_processor:8000/grids")
     # Return response.
     response = get_response.json()
+    return render_template('style.html') + render_template_string(response)
 
-    return render_template('style.html', return_content=response)
 
 #
 if __name__ == '__main__':

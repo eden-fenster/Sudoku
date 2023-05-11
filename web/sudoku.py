@@ -7,29 +7,6 @@ from web.sudoku_class import solve_sudoku
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 
-def dump_grid(description: str, grid: List[List[int]]) -> None:
-    print(description)
-    for grid_line in grid:
-        grid_line_converted = map(str, grid_line)
-        print(' '.join(grid_line_converted))
-    print("")
-
-def print_grid(description: str, grid: List[List[int]]) -> str:
-    print(description)
-    grid_string: str = ''
-    for grid_line in grid:
-        grid_line_converted = map(str, grid_line)
-        grid_string += ' '.join(grid_line_converted) + "<br>"
-        logging.debug(f"The grid so far is \n {grid_string}")
-    return grid_string
-
-def get_solutions(initial_grid: List[List[int]]) -> Tuple[List[List[int]]]:
-    solutions, have_solution, information = solve_sudoku(grid=initial_grid)
-    _ = have_solution
-    _ = information
-    return solutions
-
-
 # Reads in a file
 def read_file(file_to_open: str) -> List[str]:
     list_of_lines: List[str] = []
@@ -64,4 +41,3 @@ def create_sudoku(list_of_lines: List[str]) -> List[List[int]]:
         sudoku_line = create_sudoku_line(line=line)
         sudoku.append(sudoku_line)
     return sudoku
-
