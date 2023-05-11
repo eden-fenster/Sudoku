@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-# Gets from user a 9 x 9 board.
 import logging
-from typing import List, Tuple
-from web.sudoku_class import solve_sudoku
+from typing import List
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
