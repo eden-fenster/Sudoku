@@ -21,6 +21,7 @@ def upload_file():
 def post():
     # Gets the file and saves it.
     f = request.files['file']
+    # If empty, return.
     if f.filename is '':
         return render_template('style.html') + render_template_string("No Grid has been provided")
     f.save(f.filename)
