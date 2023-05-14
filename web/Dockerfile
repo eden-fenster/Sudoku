@@ -6,6 +6,7 @@ WORKDIR /sudoku_web
 
 ENV FLASK_APP=web/app.py
 ENV FLASK_RUN_HOST=0.0.0.0
+ENV PYTHONPATH=.
 
 COPY web/requirements.txt requirements.txt
 RUN pip install --upgrade pip
@@ -18,5 +19,5 @@ COPY web/*.py /sudoku_web/web/
 COPY web/templates/*.html /sudoku_web/web/templates/
 COPY web/static/styles/*.css /sudoku_web/web/static/styles/
 
-
-CMD ["flask", "run"]
+ENTRYPOINT python web/app.py
+# CMD ["flask", "run"]

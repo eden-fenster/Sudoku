@@ -9,10 +9,10 @@ import requests
 # create an instance of flask
 app = Flask(__name__)
 
-
 # For GET request to http://localhost:5000/
 @app.route('/')
 def upload_file():
+    print("We are here")
     return render_template('upload.html')
 
 
@@ -34,10 +34,10 @@ def post():
     # Convert to a grid.
     initial_grid: List[List[int]] = web.sudoku.create_sudoku(read_file)
     # Delete previous records.
-    requests.delete("http://sudoku_processor:8000/grids")
+    requests.delete("http://172.25.0.2:8000/grids")
     # Send parameter to processor.
-    requests.post("http://sudoku_processor:8000/grids", json={"Grid": initial_grid})
-    get_response = requests.get("http://sudoku_processor:8000/grids")
+    requests.post("http://172.25.0.2:8000/grids", json={"Grid": initial_grid})
+    get_response = requests.get("http://172.25.0.2:8000/grids")
     # Return response.
     response = get_response.json()
     return render_template('style.html') + render_template_string(response)
@@ -45,4 +45,4 @@ def post():
 
 #
 if __name__ == '__main__':
-    app.run(debug=True, port=5000, host='sudoku_web')
+    app.run(debug=True, port=5000, host='0.0.0.0')

@@ -11,29 +11,29 @@ services:
     container_name: sudoku_web
     hostname: sudoku_web
     networks:
-      sudoku_network:
-        ipv4_address: 172.23.0.2
+      connect:
+        ipv4_address: 172.25.0.3
 
 
   processor:
-    volumes:
-      - /var/lib/docker/containers/48d0d49e4082814e0e6601472e3cff2c6b28bd610620a73068a97c7357697f38/48d0d49e4082814e0e6601472e3cff2c6b28bd610620a73068a97c7357697f38-json
+#    volumes:
+#      - /var/lib/docker/containers/48d0d49e4082814e0e6601472e3cff2c6b28bd610620a73068a97c7357697f38/48d0d49e4082814e0e6601472e3cff2c6b28bd610620a73068a97c7357697f38-json
     build:
       context: .
       dockerfile: processor/Dockerfile
     ports:
-      - "8000:5000"
+      - "8000:8000"
     container_name: sudoku_processor
     hostname: sudoku_processor
     networks:
-      sudoku_network:
-        ipv4_address: 172.23.0.3
+     connect:
+       ipv4_address: 172.25.0.2
 
 
 networks:
-  sudoku_network:
+  connect:
     driver: bridge
     ipam:
      config:
-       - subnet: 172.23.0.0/16
+       - subnet: 172.25.0.0/16
 
