@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import logging
+import socket
 import sys
 from typing import List
 import web.sudoku
@@ -38,6 +39,7 @@ def post():
     requests.delete("http://10.0.2.15:8000/grids")
     # Send parameter to processor.
     requests.post("http://10.0.2.15:8000/grids", json={"Grid": initial_grid})
+    logging.debug(socket.gethostbyname("sudoku_processor"))
     get_response = requests.get("http://10.0.2.15:8000/grids")
     # Return response.
     response = get_response.json()

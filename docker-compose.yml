@@ -1,8 +1,8 @@
 version: "3.9"
 services:
-  web:
+  sudoku_web:
     depends_on:
-      - processor
+      - sudoku_processor
     build:
       context: .
       dockerfile: web/Dockerfile
@@ -12,13 +12,13 @@ services:
       - 5000
     container_name: sudoku_web
     hostname: sudoku_web
-    networks:
-      - my_network
+#    networks:
+#      - my_network
 
 
 
 
-  processor:
+  sudoku_processor:
 #    volumes:
 #      - /var/lib/docker/containers/48d0d49e4082814e0e6601472e3cff2c6b28bd610620a73068a97c7357697f38/48d0d49e4082814e0e6601472e3cff2c6b28bd610620a73068a97c7357697f38-json
     build:
@@ -30,8 +30,8 @@ services:
       - 8000
     container_name: sudoku_processor
     hostname: sudoku_processor
-    networks:
-      - my_network
+#    networks:
+#      - my_network
 
 
 
