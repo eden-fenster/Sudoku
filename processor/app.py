@@ -2,6 +2,9 @@
 import json
 import logging
 import re
+import socket
+
+import requests
 
 import processor.sudoku
 from flask import Flask, request
@@ -49,6 +52,18 @@ def delete_grids():
     grid_strings.clear()
     return '', 204
 
+# Test
+@app.route('/')
+def test():
+    logging.debug(socket.gethostbyname("sudoku_web"))
+    logging.debug(socket.gethostbyname("sudoku_processor"))
+    logging.debug("Connecting...")
+    res = requests.get("http://10.0.2.15:5000")
+    logging.debug(res)
+    res = requests.get('http://sudoku_web:5000/test')
+    return res.json()
+
+
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000, host='0.0.0.0')
+    app.run(debug=True, port=8000, host='sudoku_processor')

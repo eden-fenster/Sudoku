@@ -8,11 +8,11 @@ services:
       dockerfile: web/Dockerfile
     ports:
       - "5000:5000"
+    expose:
+      - 5000
     container_name: sudoku_web
     hostname: sudoku_web
-    networks:
-      connect:
-        ipv4_address: 172.25.0.3
+
 
 
   processor:
@@ -23,17 +23,9 @@ services:
       dockerfile: processor/Dockerfile
     ports:
       - "8000:8000"
+    expose:
+      - 8000
     container_name: sudoku_processor
     hostname: sudoku_processor
-    networks:
-     connect:
-       ipv4_address: 172.25.0.2
 
-
-networks:
-  connect:
-    driver: bridge
-    ipam:
-     config:
-       - subnet: 172.25.0.0/16
 

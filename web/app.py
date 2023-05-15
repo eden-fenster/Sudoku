@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import json
 import logging
 import sys
 from typing import List
@@ -34,15 +35,21 @@ def post():
     # Convert to a grid.
     initial_grid: List[List[int]] = web.sudoku.create_sudoku(read_file)
     # Delete previous records.
-    requests.delete("http://172.25.0.2:8000/grids")
+    requests.delete("http://10.0.2.15:8000/grids")
     # Send parameter to processor.
-    requests.post("http://172.25.0.2:8000/grids", json={"Grid": initial_grid})
-    get_response = requests.get("http://172.25.0.2:8000/grids")
+    requests.post("http://10.0.2.15:8000/grids", json={"Grid": initial_grid})
+    get_response = requests.get("http://10.0.2.15:8000/grids")
     # Return response.
     response = get_response.json()
     return render_template('style.html') + render_template_string(response)
 
+@app.route('/test')
+def test():
+    logging.debug("Connected")
+    string: str = "Hello"
+    return json.dumps(string)
+
 
 #
 if __name__ == '__main__':
-    app.run(debug=True, port=5000, host='0.0.0.0')
+    app.run(debug=True, port=5000, host='sudoku_web')
