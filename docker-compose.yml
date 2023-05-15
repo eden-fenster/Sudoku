@@ -12,6 +12,9 @@ services:
       - 5000
     container_name: sudoku_web
     hostname: sudoku_web
+    networks:
+      - my_network
+
 
 
 
@@ -27,5 +30,17 @@ services:
       - 8000
     container_name: sudoku_processor
     hostname: sudoku_processor
+    networks:
+      - my_network
+
+
+
+networks:
+  my_network:
+    name: connect
+    driver: bridge
+    ipam:
+      config:
+        - gateway: 10.0.2.15
 
 
