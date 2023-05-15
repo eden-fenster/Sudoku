@@ -19,8 +19,8 @@ services:
 
 
   sudoku_processor:
-#    volumes:
-#      - /var/lib/docker/containers/48d0d49e4082814e0e6601472e3cff2c6b28bd610620a73068a97c7357697f38/48d0d49e4082814e0e6601472e3cff2c6b28bd610620a73068a97c7357697f38-json
+    volumes:
+      - .:/logs
     build:
       context: .
       dockerfile: processor/Dockerfile
