@@ -19,8 +19,6 @@ services:
 
 
   sudoku_processor:
-    volumes:
-      - .:/logs
     build:
       context: .
       dockerfile: processor/Dockerfile
