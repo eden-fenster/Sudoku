@@ -42,7 +42,7 @@ def add_grids():
     # Add to list.
     logging.debug(f"Adding {solved_string} to list")
     grid_strings.append("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string)
-    with open("output.txt", "w") as f:
+    with open("logs/output.txt", "w") as f:
         print(grid_strings, file=f)
     return '', 204
 
