@@ -14,7 +14,7 @@ RUN apt-get update
 RUN apt-get install inetutils-ping
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-VOLUME /path/to/output.txt
+VOLUME /path/to
 
 EXPOSE 8000
 
@@ -22,5 +22,5 @@ EXPOSE 8000
 COPY processor/*.py /sudoku_processor/processor/
 
 
-CMD [ "python", "./processor/logs.py" ]
+CMD [ "python3", "./logs.py" ]
 CMD ["flask", "run", "-p", "8000"]
