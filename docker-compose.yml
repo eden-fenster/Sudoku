@@ -20,7 +20,7 @@ services:
 
   sudoku_processor:
     volumes:
-      - ./output:/place-to-write-files-by-application
+      - ./output:/files
     build:
       context: .
       dockerfile: processor/Dockerfile
