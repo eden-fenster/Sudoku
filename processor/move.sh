@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-mv output.txt /files
+mv output.txt /place-to-write-files-by-application
