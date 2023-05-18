@@ -3,6 +3,7 @@ import json
 import logging
 import re
 import socket
+import subprocess
 
 import requests
 
@@ -42,8 +43,10 @@ def add_grids():
     # Add to list.
     logging.debug(f"Adding {solved_string} to list")
     grid_strings.append("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string)
-    with open("logs/output.txt", "w") as f:
+    with open("output.txt", "w") as f:
         print(grid_strings, file=f)
+    logging.debug("Moving file")
+    subprocess.call("./processor/move.sh")
     return '', 204
 
 
