@@ -20,7 +20,6 @@ EXPOSE 8000
 # Copy database to directory.
 COPY processor/*.py /sudoku_processor/processor/
 COPY processor/*.sh /sudoku_processor/processor/
-COPY processor/database/*.py /database/
 
 
 CMD ["flask", "run", "-p", "8000"]

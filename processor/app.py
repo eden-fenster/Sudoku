@@ -2,16 +2,12 @@
 import json
 import logging
 import re
-import socket
 import subprocess
-
-
-import requests
 
 import processor.sudoku
 from flask import Flask, request
-from database.create_database import create_database
-from database.log_database import add_one
+import processor.log_database
+
 
 app = Flask(__name__)
 
@@ -35,7 +31,8 @@ def get_grids():
 @app.route('/grids', methods=['POST'])
 def add_grids():
     # Create database.
-    create_database(name='sudoku_results')
+    subprocess.call("./processor/create.sh")
+    db = processor.log_database.Database()
     # Add grid to records.
     grids.append(request.get_json())
     initial_grid = grids[0]["Grid"]
@@ -54,9 +51,10 @@ def add_grids():
     with open("output.txt", "w") as f:
         print(grid_strings, file=f)
     logging.debug("Moving file")
-    subprocess.call("./processor/move.sh")
     # Adding record to database
-    add_one("success")
+    db.add_one(result="y")
+    # Moving output and database to different volumes.
+    subprocess.call("./processor/move.sh")
     return '', 204
 
 

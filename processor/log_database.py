@@ -16,6 +16,6 @@ class Database:
 
     # Add a new record to the table
     def add_one(self, result: str):
-        self._cursor.execute("INSERT INTO sudoku_results VALUES (?, ?, ?)", result)
+        self._cursor.execute("INSERT INTO sudoku_results VALUES (?)", (result))
         self._connection.commit()
         self._connection.close()
