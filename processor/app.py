@@ -5,10 +5,13 @@ import re
 import socket
 import subprocess
 
+
 import requests
 
 import processor.sudoku
 from flask import Flask, request
+from database.create_database import create_database
+from database.log_database import add_one
 
 app = Flask(__name__)
 
@@ -31,9 +34,14 @@ def get_grids():
 
 @app.route('/grids', methods=['POST'])
 def add_grids():
+    # Create database.
+    create_database(name='sudoku_results')
+    # Add grid to records.
     grids.append(request.get_json())
     initial_grid = grids[0]["Grid"]
+    # Convert input to string.
     initial_string: str = processor.sudoku.print_grid(description="Initial grid", grid=initial_grid)
+    # Solve the sudoku.
     solved = processor.sudoku.get_solutions(initial_grid=initial_grid)
     solved_string: str = ''
     for i, solve in enumerate(solved):
@@ -47,6 +55,8 @@ def add_grids():
         print(grid_strings, file=f)
     logging.debug("Moving file")
     subprocess.call("./processor/move.sh")
+    # Adding record to database
+    add_one("success")
     return '', 204
 
 
