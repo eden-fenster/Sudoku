@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-python3 ./processor/create_database.py
+python3 ./database/create_database.py

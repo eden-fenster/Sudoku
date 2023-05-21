@@ -13,7 +13,6 @@ RUN apt-get update
 RUN apt-get install inetutils-ping
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-RUN mkdir ./output
 
 EXPOSE 8000
 

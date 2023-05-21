@@ -53,7 +53,7 @@ def add_grids():
     # requests.delete("http://10.0.2.15:3000/database")
     requests.post("http://sudoku_database:3000/database", json={"Result": 'y'})
     # Moving output to different volumes.
-    subprocess.call("./processor/move.sh")
+    # subprocess.call("./processor/move.sh")
     return '', 204
 
 
