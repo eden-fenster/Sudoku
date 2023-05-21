@@ -31,6 +31,7 @@ def get_grids():
 @app.route('/grids', methods=['POST'])
 def add_grids():
     # Create database.
+    # TODO: Create RESTful calls (DELETE).
     subprocess.call("./processor/create.sh")
     db = processor.log_database.Database()
     # Add grid to records.
@@ -52,6 +53,7 @@ def add_grids():
         print(grid_strings, file=f)
     logging.debug("Moving file")
     # Adding record to database
+    # TODO: Create RESTful calls (POST).
     db.add_one(result="y")
     # Moving output and database to different volumes.
     subprocess.call("./processor/move.sh")

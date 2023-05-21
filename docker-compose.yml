@@ -34,7 +34,19 @@ services:
 #    networks:
 #      - my_network
 
-
+  sudoku_database:
+    volumes:
+      - ./output:/files
+      - ./output:/database
+    build:
+      context: .
+      dockerfile: database/Dockerfile
+    ports:
+      - "3000:3000"
+    expose:
+      - 3000
+    container_name: sudoku_database
+    hostname: sudoku_database
 
 networks:
   my_network:
