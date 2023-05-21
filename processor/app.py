@@ -4,6 +4,8 @@ import logging
 import re
 import subprocess
 
+import requests
+
 import processor.sudoku
 from flask import Flask, request
 import processor.log_database
@@ -31,7 +33,6 @@ def get_grids():
 @app.route('/grids', methods=['POST'])
 def add_grids():
     # Create database.
-    # TODO: Create RESTful calls (DELETE).
     subprocess.call("./processor/create.sh")
     db = processor.log_database.Database()
     # Add grid to records.
@@ -53,7 +54,8 @@ def add_grids():
         print(grid_strings, file=f)
     logging.debug("Moving file")
     # Adding record to database
-    # TODO: Create RESTful calls (POST).
+    requests.delete("http://10.0.2.15:3000/database")
+    requests.post("http://10.0.2.15:3000/database", json={'y'})
     db.add_one(result="y")
     # Moving output and database to different volumes.
     subprocess.call("./processor/move.sh")

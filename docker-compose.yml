@@ -19,9 +19,9 @@ services:
 
 
   sudoku_processor:
-    volumes:
-      - ./output:/files
-      - ./output:/database
+#    volumes:
+#      - ./output:/files
+#      - ./output:/database
     build:
       context: .
       dockerfile: processor/Dockerfile
@@ -35,9 +35,6 @@ services:
 #      - my_network
 
   sudoku_database:
-    volumes:
-      - ./output:/files
-      - ./output:/database
     build:
       context: .
       dockerfile: database/Dockerfile
