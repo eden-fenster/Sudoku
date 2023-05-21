@@ -19,3 +19,8 @@ class Database:
         self._cursor.execute("INSERT INTO sudoku_results VALUES (?)", (result))
         self._connection.commit()
         self._connection.close()
+
+    def delete_one(self, id: str):
+        self._cursor.execute("DELETE from sudoku_results WHERE rowid = (?)", id)
+        self._connection.commit()
+        self._connection.close()

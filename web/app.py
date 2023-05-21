@@ -25,7 +25,7 @@ def post():
     f = request.files['file']
     # If empty, return.
     if f.filename == '':
-        return render_template('style.html') + render_template_string("No Grid has been provided")
+        return render_template('results.html') + render_template_string("No Grid has been provided")
     f.save(f.filename)
     logging.debug(f"The file is {f}")
     # Reads the file, exit if it's an invalid file.
@@ -36,14 +36,14 @@ def post():
     # Convert to a grid.
     initial_grid: List[List[int]] = web.sudoku.create_sudoku(read_file)
     # Delete previous records.
-    requests.delete("http://10.0.2.15:8000/grids")
+    requests.delete("http://sudoku_processor:8000/grids")
     # Send parameter to processor.
-    requests.post("http://10.0.2.15:8000/grids", json={"Grid": initial_grid})
+    requests.post("http://sudoku_processor:8000/grids", json={"Grid": initial_grid})
     logging.debug(socket.gethostbyname("sudoku_processor"))
-    get_response = requests.get("http://10.0.2.15:8000/grids")
+    get_response = requests.get("http://sudoku_processor:8000/grids")
     # Return response.
     response = get_response.json()
-    return render_template('style.html') + render_template_string(response)
+    return render_template('results.html') + render_template_string(response)
 
 
 if __name__ == '__main__':

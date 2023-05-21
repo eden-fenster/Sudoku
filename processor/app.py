@@ -8,7 +8,6 @@ import requests
 
 import processor.sudoku
 from flask import Flask, request
-import processor.log_database
 
 
 app = Flask(__name__)
@@ -32,9 +31,6 @@ def get_grids():
 
 @app.route('/grids', methods=['POST'])
 def add_grids():
-    # Create database.
-    subprocess.call("./processor/create.sh")
-    db = processor.log_database.Database()
     # Add grid to records.
     grids.append(request.get_json())
     initial_grid = grids[0]["Grid"]
@@ -54,10 +50,9 @@ def add_grids():
         print(grid_strings, file=f)
     logging.debug("Moving file")
     # Adding record to database
-    requests.delete("http://10.0.2.15:3000/database")
-    requests.post("http://10.0.2.15:3000/database", json={'y'})
-    db.add_one(result="y")
-    # Moving output and database to different volumes.
+    # requests.delete("http://10.0.2.15:3000/database")
+    requests.post("http://sudoku_database:3000/database", json={"Result": 'y'})
+    # Moving output to different volumes.
     subprocess.call("./processor/move.sh")
     return '', 204
 

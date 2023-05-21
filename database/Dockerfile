@@ -18,5 +18,6 @@ EXPOSE 3000
 
 # Copy database to directory.
 COPY database/*.py /sudoku_database/database/
+COPY database/*.sh /sudoku_database/database/
 
 CMD ["flask", "run", "-p", "3000"]
