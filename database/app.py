@@ -6,7 +6,6 @@ import subprocess
 from log_database import Database
 from flask import Flask, request
 
-
 app = Flask(__name__)
 
 # List to store received response.
@@ -18,6 +17,17 @@ responses = []
 def get_database():
     db = Database()
     return json.dumps(db.show_all())
+
+
+@app.route('/item')
+def is_only_one():
+    db = Database()
+    result: str = 'False'
+    # If same result, update
+    if db.show_one() == db.show_all():
+        result = 'True'
+    # Return
+    return json.dumps(result)
 
 
 @app.route('/database', methods=['POST'])

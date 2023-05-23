@@ -14,9 +14,14 @@ class Database:
         for item in items:
             print(item)
 
+    def show_one(self):
+        self._cursor.execute("SELECT rowid, * FROM sudoku_results")
+        item = self._cursor.fetchone()
+        print(item)
+
     # Add a new record to the table
     def add_one(self, result: str):
-        self._cursor.execute("INSERT INTO sudoku_results VALUES (?)", (result))
+        self._cursor.execute("INSERT INTO sudoku_results VALUES (?)", result)
         self._connection.commit()
         self._connection.close()
 
