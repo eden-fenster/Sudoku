@@ -37,7 +37,7 @@ def add_to_database():
 @app.route('/database', methods=['DELETE'])
 def delete_records():
     db = Database()
-    if len(responses) == 2:
+    if len(responses) > 1:
         db.delete_one(id='1')
         logging.debug("record deleted")
     return '', 204
