@@ -1,6 +1,7 @@
 body {
      background-color: black;
      color: white;
+     font-family: "Lucida Console", "Courier New", monospace;
    }
    script {
    color: white;
@@ -9,20 +10,24 @@ body {
    h2 {
      color: white;
      margin-left: 0px;
+     font-family: "Lucida Console", "Courier New", monospace;
      text-align: center;
    }
    h4 {
      color: white;
      margin-left: 0px;
+     font-family: "Lucida Console", "Courier New", monospace;
      text-align: center;
    }
    form {
      color: white;
      margin-left: 0px;
+     font-family: "Lucida Console", "Courier New", monospace;
      text-align: center;
    }
    p {
      color: white;
      margin-left: 0px;
+     font-family: "Lucida Console", "Courier New", monospace;
      text-align: center;
    }
