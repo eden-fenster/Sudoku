@@ -36,13 +36,12 @@ def add_to_database():
 # Delete previous records.
 @app.route('/database', methods=['DELETE'])
 def delete_records():
-    responses.clear()
     db = Database()
-    result: bool = db.show_one() == db.show_all()
-    if result:
+    if len(responses) == 2:
         db.delete_one(id='1')
         logging.debug("record deleted")
     return '', 204
+
 
 
 if __name__ == '__main__':
