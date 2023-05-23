@@ -46,14 +46,11 @@ def add_grids():
     # Add to list.
     logging.debug(f"Adding {solved_string} to list")
     grid_strings.append("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string)
-    with open("output.txt", "w") as f:
-        print(grid_strings, file=f)
     logging.debug("Moving file")
     # Adding record to database
-    # requests.delete("http://10.0.2.15:3000/database")
     requests.post("http://sudoku_database:3000/database", json={"Result": 'y'})
-    # Moving output to different volumes.
-    # subprocess.call("./processor/move.sh")
+    # TODO: Find way not to delete first record + find length of database.
+    requests.delete("http://sudoku_database:3000/database")
     return '', 204
 
 

@@ -16,8 +16,8 @@ responses = []
 # Returns the results
 @app.route('/database')
 def get_database():
-    # TODO: return database contents in jSONfied way.
-    pass
+    db = Database()
+    return json.dumps(db.show_all())
 
 
 @app.route('/database', methods=['POST'])
@@ -38,7 +38,7 @@ def add_to_database():
 @app.route('/database', methods=['DELETE'])
 def delete_records():
     responses.clear()
-    db = Database
+    db = Database()
     db.delete_one(id='1')
     return '', 204
 
