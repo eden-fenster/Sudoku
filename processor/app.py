@@ -7,8 +7,7 @@ import subprocess
 import requests
 
 import processor.sudoku
-from flask import Flask, request
-
+from flask import Flask, request, render_template_string
 
 app = Flask(__name__)
 
@@ -49,12 +48,8 @@ def add_grids():
     # Adding record to database
     requests.post("http://sudoku_database:3000/database", json={"Result": 'y'})
     logging.debug("Added to database")
-    # Checking if we are the first record in the database.
-    is_only_one = requests.get("http://sudoku_database:3000/item")
-    # If not, delete previous record.
-    if is_only_one.json() == json.dumps('False'):
-        requests.delete("http://sudoku_database:3000/database")
-        logging.debug("record deleted")
+    # Checking if we are the first record in the database, if yes, delete.
+    requests.delete("http://sudoku_database:3000/database")
     return '', 204
 
 

@@ -19,17 +19,6 @@ def get_database():
     return json.dumps(db.show_all())
 
 
-@app.route('/item')
-def is_only_one():
-    db = Database()
-    result: str = 'False'
-    # If same result, update
-    if db.show_one() == db.show_all():
-        result = 'True'
-    # Return
-    return json.dumps(result)
-
-
 @app.route('/database', methods=['POST'])
 def add_to_database():
     # Adding to list.
@@ -49,7 +38,10 @@ def add_to_database():
 def delete_records():
     responses.clear()
     db = Database()
-    db.delete_one(id='1')
+    result: bool = db.show_one() == db.show_all()
+    if result:
+        db.delete_one(id='1')
+        logging.debug("record deleted")
     return '', 204
 
 
