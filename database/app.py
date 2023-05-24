@@ -38,7 +38,8 @@ def add_to_database():
 # Delete previous records.
 @app.route('/database', methods=['DELETE'])
 def delete_records():
-    sudoku_db= Database()
+    """Deleting from database"""
+    sudoku_db = Database()
     if len(responses) > 1:
         sudoku_db.delete_one(i_d='1')
         logging.debug("record deleted")
