@@ -6,7 +6,9 @@ from typing import List, Tuple, Set, Dict
 
 
 # Not my code, from the internet, incorporating this into my program.
-
+# pylint: disable=too-many-locals
+# pylint: disable=redefined-argument-from-local
+# pylint: disable=too-many-branches
 
 class Sudoku:
     """The class object"""
