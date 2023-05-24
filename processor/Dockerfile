@@ -2,7 +2,7 @@
 
 FROM python:3.10.6
 
-WORKDIR /sudoku_processor
+WORKDIR /sudoku_processor_directory
 
 
 ENV FLASK_APP=processor/app.py
@@ -17,8 +17,7 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 # Copy database to directory.
-COPY processor/*.py /sudoku_processor/processor/
-COPY processor/*.sh /sudoku_processor/processor/
+COPY processor/*.py /sudoku_processor_directory/processor/
 
 
 CMD ["flask", "run", "-p", "8000"]

@@ -6,7 +6,7 @@ import sys
 from typing import List
 from flask import Flask, request, render_template, render_template_string
 import requests
-import web.sudoku
+from web import sudoku
 
 
 # create an instance of flask
@@ -33,12 +33,12 @@ def post():
     received_file.save(received_file.filename)
     logging.debug("The file is %s", received_file)
     # Reads the file, exit if it's an invalid file.
-    read_file: List[str] = web.sudoku.read_file(file_to_open=received_file.filename)
+    read_file: List[str] = sudoku.read_file(file_to_open=received_file.filename)
     if not read_file:
         logging.error("No sudoku found")
         sys.exit(1)
     # Convert to a grid.
-    initial_grid: List[List[int]] = web.sudoku.create_sudoku(read_file)
+    initial_grid: List[List[int]] = sudoku.create_sudoku(read_file)
     # Delete previous records.
     requests.delete("http://sudoku_processor:8000/grids", timeout=10)
     # Send parameter to processor.

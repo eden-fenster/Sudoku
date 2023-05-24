@@ -2,21 +2,21 @@
 """Sudoku Solver - Database"""
 import json
 import logging
-import subprocess
 from log_database import Database
+from create_database import create
 from flask import Flask, request
 
 app = Flask(__name__)
 
 # List to store received response.
 responses = []
+sudoku_db = Database(database_name='sudoku_results')
 
 
 # Returns the results
 @app.route('/database')
 def get_database():
     """Getting from database"""
-    sudoku_db = Database()
     return json.dumps(sudoku_db.show_all())
 
 
@@ -27,9 +27,8 @@ def add_to_database():
     responses.append(request.get_json())
     to_add_to_database = responses[0]["Result"]
     # Create database.
-    subprocess.call("./database/create.sh")
+    create(database_name='sudoku_results')
     logging.debug("created")
-    sudoku_db = Database()
     # Adding to database
     sudoku_db.add_one(result=to_add_to_database)
     return '', 204
@@ -39,12 +38,10 @@ def add_to_database():
 @app.route('/database', methods=['DELETE'])
 def delete_records():
     """Deleting from database"""
-    sudoku_db = Database()
     if len(responses) > 1:
         sudoku_db.delete_one(i_d='1')
         logging.debug("record deleted")
     return '', 204
-
 
 
 if __name__ == '__main__':

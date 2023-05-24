@@ -2,7 +2,7 @@
 
 FROM python:3.10.6
 
-WORKDIR /sudoku_database
+WORKDIR /sudoku_database_directory
 
 
 ENV FLASK_APP=database/app.py
@@ -17,7 +17,6 @@ RUN pip install -r requirements.txt
 EXPOSE 3000
 
 # Copy database to directory.
-COPY database/*.py /sudoku_database/database/
-COPY database/*.sh /sudoku_database/database/
+COPY database/*.py /sudoku_database_directory/database/
 
 CMD ["flask", "run", "-p", "3000"]

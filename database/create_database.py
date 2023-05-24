@@ -2,11 +2,16 @@
 """Creating a database"""
 import sqlite3
 
-conn = sqlite3.connect('sudoku_results.db')
-c = conn.cursor()
-COMMAND = """CREATE TABLE IF NOT EXISTS sudoku_results (
-results text
-)"""
-c.execute(COMMAND)
-conn.commit()
-conn.close()
+# pylint: disable=invalid-name
+
+
+def create(database_name: str):
+    """Creating a database"""
+    conn = sqlite3.connect(f'{database_name}.db', check_same_thread=False)
+    c = conn.cursor()
+    COMMAND = f"""CREATE TABLE IF NOT EXISTS {database_name} (
+    results text
+    )"""
+    c.execute(COMMAND)
+    conn.commit()
+    conn.close()

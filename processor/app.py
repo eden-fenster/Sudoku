@@ -7,7 +7,7 @@ from typing import List
 
 import requests
 from flask import Flask, request
-import processor.sudoku
+from processor import sudoku
 
 app = Flask(__name__)
 
@@ -35,12 +35,12 @@ def add_grids():
     grids.append(request.get_json())
     initial_grid = grids[0]["Grid"]
     # Convert input to string.
-    initial_string: str = processor.sudoku.print_grid(description="Initial grid", grid=initial_grid)
+    initial_string: str = sudoku.print_grid(description="Initial grid", grid=initial_grid)
     # Solve the sudoku.
-    solved = processor.sudoku.get_solutions(initial_grid=initial_grid)
+    solved = sudoku.get_solutions(initial_grid=initial_grid)
     solved_string: str = ''
     for i, solve in enumerate(solved):
-        solved_string += processor.sudoku.print_grid(description=f"solution {i + 1}", grid=solve)
+        solved_string += sudoku.print_grid(description=f"solution {i + 1}", grid=solve)
     # Clears list from previous attempts
     grid_strings.clear()
     # Add to list.
