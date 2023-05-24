@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
+"""Sudoku Solver - Database"""
 import json
 import logging
-import re
 import subprocess
 from log_database import Database
 from flask import Flask, request
@@ -15,32 +15,35 @@ responses = []
 # Returns the results
 @app.route('/database')
 def get_database():
-    db = Database()
-    return json.dumps(db.show_all())
+    """Returning the database"""
+    sudoku_db = Database()
+    return json.dumps(sudoku_db.show_all())
 
 
 @app.route('/database', methods=['POST'])
 def add_to_database():
+    """Adding to database"""
     # Adding to list.
     responses.append(request.get_json())
     to_add_to_database = responses[0]["Result"]
     # Create database.
     subprocess.call("./database/create.sh")
     logging.debug("created")
-    db = Database()
+    sudoku_db = Database()
     # Adding to database
-    db.add_one(result=to_add_to_database)
+    sudoku_db.add_one(result=to_add_to_database)
     return '', 204
 
 
 # Delete previous records.
 @app.route('/database', methods=['DELETE'])
 def delete_records():
+    """Deleting old results"""
     responses.clear()
-    db = Database()
-    result: bool = db.show_one() == db.show_all()
+    sudoku_db = Database()
+    result: bool = sudoku_db.show_one() == sudoku_db.show_all()
     if result:
-        db.delete_one(id='1')
+        sudoku_db.delete_one(id='1')
         logging.debug("record deleted")
     return '', 204
 
