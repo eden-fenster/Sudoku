@@ -9,9 +9,10 @@ def create(database_name: str):
     """Creating a database"""
     conn = sqlite3.connect(f'{database_name}.db', check_same_thread=False)
     c = conn.cursor()
-    COMMAND = f"""CREATE TABLE IF NOT EXISTS {database_name} (
-    results text
+    command = f"""CREATE TABLE IF NOT EXISTS {database_name} (
+    results text,
+    time real
     )"""
-    c.execute(COMMAND)
+    c.execute(command)
     conn.commit()
     conn.close()

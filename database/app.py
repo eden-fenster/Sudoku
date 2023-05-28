@@ -25,12 +25,13 @@ def add_to_database():
     """Adding to database"""
     # Adding to list.
     responses.append(request.get_json())
-    to_add_to_database = responses[0]["Result"]
+    result = responses[0]["Result"]
+    time = responses[0]["Time"]
     # Create database.
     create(database_name='sudoku_results')
     logging.debug("created")
     # Adding to database
-    sudoku_db.add_one(result=to_add_to_database)
+    sudoku_db.add_one(result=result, time=time)
     return '', 204
 
 
@@ -39,7 +40,7 @@ def add_to_database():
 def delete_records():
     """Deleting from database"""
     if len(responses) > 1:
-        sudoku_db.delete_one(i_d='1')
+        sudoku_db.delete_one(id='1')
         logging.debug("record deleted")
     return '', 204
 

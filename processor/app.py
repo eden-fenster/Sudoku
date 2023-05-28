@@ -54,7 +54,7 @@ def add_grids():
          "<br>Time taken to solve: <br>" + str(total_time) + " seconds")
     # Adding record to database
     requests.post("http://sudoku_database:3000/database",
-                  json={"Result": 'y'}, timeout=10)
+                  json={"Result": 'y', "Time": total_time}, timeout=10)
     logging.debug("Added to database")
     # Checking if we are the first record in the database, if yes, delete.
     requests.delete("http://sudoku_database:3000/database", timeout=10)
