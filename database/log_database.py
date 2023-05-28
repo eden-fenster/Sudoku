@@ -32,10 +32,8 @@ class Database:
         """Adding a record"""
         self._cursor.execute(f"INSERT INTO {self._database_name} VALUES (?, ?)", (result, time))
         self._connection.commit()
-        self._connection.close()
 
     def delete_one(self, id: str):
         """Deleting a record"""
         self._cursor.execute(f"DELETE from {self._database_name} WHERE rowid = (?)", id)
         self._connection.commit()
-        self._connection.close()

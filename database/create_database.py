@@ -15,4 +15,3 @@ def create(database_name: str):
     )"""
     c.execute(command)
     conn.commit()
-    conn.close()

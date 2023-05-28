@@ -2,7 +2,7 @@
 """Sudoku Solver - Relevant methods"""
 import logging
 from typing import List
-from processor.sudoku_class import solve_sudoku
+from processor.new_sudoku_class import puzzle
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
@@ -20,7 +20,5 @@ def print_grid(description: str, grid: List[List[int]]) -> str:
 
 def get_solutions(initial_grid: List[List[int]]) -> List[List[int]]:
     """Getting solution"""
-    solutions, have_solution, information = solve_sudoku(grid=initial_grid)
-    _ = have_solution
-    _ = information
+    solutions = puzzle(grid=initial_grid)
     return solutions

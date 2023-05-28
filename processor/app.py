@@ -42,9 +42,7 @@ def add_grids():
     solved = sudoku.get_solutions(initial_grid=initial_grid)
     end = time.time()
     total_time = end - start
-    solved_string: str = ''
-    for i, solve in enumerate(solved):
-        solved_string += sudoku.print_grid(description=f"solution {i + 1}", grid=solve)
+    solved_string: str = sudoku.print_grid(description="Solved grid", grid=solved)
     # Clears list from previous attempts
     grid_strings.clear()
     # Add to list.
