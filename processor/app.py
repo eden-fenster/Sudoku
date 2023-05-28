@@ -3,6 +3,7 @@
 import json
 import logging
 import re
+import time
 from typing import List
 
 import requests
@@ -37,7 +38,10 @@ def add_grids():
     # Convert input to string.
     initial_string: str = sudoku.print_grid(description="Initial grid", grid=initial_grid)
     # Solve the sudoku.
+    start = time.time()
     solved = sudoku.get_solutions(initial_grid=initial_grid)
+    end = time.time()
+    total_time = end - start
     solved_string: str = ''
     for i, solve in enumerate(solved):
         solved_string += sudoku.print_grid(description=f"solution {i + 1}", grid=solve)
@@ -45,8 +49,9 @@ def add_grids():
     grid_strings.clear()
     # Add to list.
     logging.debug("Adding %s to list", solved_string)
-    grid_strings.append \
-        ("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string)
+    grid_strings.append\
+        ("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string +
+         "<br>Time taken to solve: <br>" + str(total_time) + " seconds")
     # Adding record to database
     requests.post("http://sudoku_database:3000/database",
                   json={"Result": 'y'}, timeout=10)
