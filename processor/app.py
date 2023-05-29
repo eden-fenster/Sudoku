@@ -5,10 +5,13 @@ import logging
 import re
 import time
 from typing import List
+from datetime import datetime
 
 import requests
 from flask import Flask, request
 from processor import sudoku
+
+# pylint: disable=consider-using-f-string
 
 app = Flask(__name__)
 
@@ -37,8 +40,11 @@ def add_grids():
     initial_grid = grids[0]["Grid"]
     # Convert input to string.
     initial_string: str = sudoku.print_grid(description="Initial grid", grid=initial_grid)
-    # Solve the sudoku.
+    # Getting current date and time
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     start = time.time()
+    # Solve the sudoku.
     solved = sudoku.get_solutions(initial_grid=initial_grid)
     end = time.time()
     total_time = end - start
@@ -49,10 +55,12 @@ def add_grids():
     logging.debug("Adding %s to list", solved_string)
     grid_strings.append\
         ("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string +
-         "<br>Time taken to solve: <br>" + str(total_time) + " seconds")
+         "<br>Time taken to solve: <br>" + str("%.2f" % total_time) + " seconds<br>"
+         + "<br>Current Time: <br>" +
+         dt_string)
     # Adding record to database
     requests.post("http://sudoku_database:3000/database",
-                  json={"Result": 'y', "Time": total_time}, timeout=10)
+                  json={"Result": 'y', "Time": "%.2f" % total_time, "Date": dt_string}, timeout=10)
     logging.debug("Added to database")
     # Checking if we are the first record in the database, if yes, delete.
     requests.delete("http://sudoku_database:3000/database", timeout=10)

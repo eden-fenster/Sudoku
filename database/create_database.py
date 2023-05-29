@@ -11,7 +11,8 @@ def create(database_name: str):
     c = conn.cursor()
     command = f"""CREATE TABLE IF NOT EXISTS {database_name} (
     results text,
-    time real
+    time real,
+    date text
     )"""
     c.execute(command)
     conn.commit()

@@ -27,11 +27,12 @@ def add_to_database():
     responses.append(request.get_json())
     result = responses[0]["Result"]
     time = responses[0]["Time"]
+    date = responses[0]["Date"]
     # Create database.
     create(database_name='sudoku_results')
     logging.debug("created")
     # Adding to database
-    sudoku_db.add_one(result=result, time=time)
+    sudoku_db.add_one(result=result, time=time, date=date)
     return '', 204
 
 
