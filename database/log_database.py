@@ -34,7 +34,7 @@ class Database:
             (f"INSERT INTO {self._database_name} VALUES (?, ?, ?)", (result, time, date))
         self._connection.commit()
 
-    def delete_one(self, id: str):
+    def delete_one(self, id: int):
         """Deleting a record"""
-        self._cursor.execute(f"DELETE from {self._database_name} WHERE rowid = (?)", id)
+        self._cursor.execute(f"DELETE from {self._database_name} WHERE id = (?)", id)
         self._connection.commit()

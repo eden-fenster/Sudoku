@@ -10,6 +10,7 @@ def create(database_name: str):
     conn = sqlite3.connect(f'{database_name}.db', check_same_thread=False)
     c = conn.cursor()
     command = f"""CREATE TABLE IF NOT EXISTS {database_name} (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     results text,
     time text,
     date text
