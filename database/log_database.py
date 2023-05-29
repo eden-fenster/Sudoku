@@ -28,7 +28,7 @@ class Database:
         print(item)
 
     # Add a new record to the table
-    def add_one(self, result: str, time: float, date: str):
+    def add_one(self, result: str, time: str, date: str):
         """Adding a record"""
         self._cursor.execute\
             (f"INSERT INTO {self._database_name} VALUES (?, ?, ?)", (result, time, date))

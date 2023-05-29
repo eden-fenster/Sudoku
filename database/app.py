@@ -41,7 +41,7 @@ def add_to_database():
 def delete_records():
     """Deleting from database"""
     if len(responses) > 1:
-        sudoku_db.delete_one(id='1')
+        sudoku_db.delete_one(id='0')
         logging.debug("record deleted")
     return '', 204
 
