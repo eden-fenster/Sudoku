@@ -25,9 +25,9 @@ def add_to_database():
     """Adding to database"""
     # Adding to list.
     responses.append(request.get_json())
-    result = responses[0]["Result"]
-    time = responses[0]["Time"]
-    date = responses[0]["Date"]
+    result = responses[len(responses) - 1]["Result"]
+    time = responses[len(responses) - 1]["Time"]
+    date = responses[len(responses) - 1]["Date"]
     # Create database.
     create(database_name='sudoku_results')
     logging.debug("created")
