@@ -3,8 +3,9 @@
 <head>
     <title>Sudoku Solver Server</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <script type = "text/javascript" src="./static/scripts/script.js"></script>
 </head>
-   <body>
+   <body onload="unload_main();">
       <h2 id="this-web-page-will-solve-your-sudoku-for-you-">This web page will solve your sudoku for you !</h2>
       <h4 id="steps-">Steps:</h4>
       <h4 id="1-upload-a-text-file-that-has-an-unsolved-sudoku-in-it-">1. Upload a text file that has an unsolved sudoku in it here.</h4>
