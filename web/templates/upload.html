@@ -3,18 +3,19 @@
 <head>
     <title>Sudoku Solver Server</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <script type = "text/javascript" src="./static/scripts/script.js"></script>
 </head>
-   <body>
-      <h2 id="this-web-page-will-solve-your-sudoku-for-you-">This web page will solve your sudoku for you !</h2>
-      <h4 id="steps-">Steps:</h4>
-      <h4 id="1-upload-a-text-file-that-has-an-unsolved-sudoku-in-it-">1. Upload a text file that has an unsolved sudoku in it here.</h4>
+   <body onload="unload_main();">
+      <h2>This web page will solve your sudoku for you !</h2>
+      <h4>Steps:</h4>
+      <h4>1. Upload a text file that has an unsolved sudoku in it here.</h4>
       <form action = "/results" method = "POST"
          enctype = "multipart/form-data">
          <input type = "file" name = "file" accept=".txt"/>
          <input type = "submit" value="Upload"/>
       </form>
-      <h4 id="2-wait-">2. Wait.</h4>
-      <h4 id="3-enjoy-your-solved-sudoku-">3. Enjoy your solved sudoku.</h4>
+      <h4>2. Wait.</h4>
+      <h4>3. Enjoy your solved sudoku.</h4>
 
 
    </body>
