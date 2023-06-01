@@ -42,6 +42,17 @@ services:
     container_name: sudoku_database
     hostname: sudoku_database
 
+  query:
+    build:
+      context: .
+      dockerfile: query/Dockerfile
+    ports:
+      - "1000:1000"
+    expose:
+      - 1000
+    container_name: sudoku_query
+    hostname: sudoku_query
+
 networks:
   my_network:
     name: connect
