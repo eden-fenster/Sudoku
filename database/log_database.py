@@ -14,18 +14,20 @@ class Database:
         self._connection = sqlite3.connect(f'{database_name}.db', check_same_thread=False)
         self._cursor = self._connection.cursor()
 
-    def show_all(self):
+    def show_all(self) -> str:
         """Printing all records"""
         self._cursor.execute(f"SELECT rowid, * FROM {self._database_name}")
         items = self._cursor.fetchall()
+        items_string: str = ''
         for item in items:
-            print(item)
+            items_string += str(item) + "<br>"
+        return items_string
 
-    def show_one(self):
+    def show_one(self) -> str:
         """Printing a record"""
         self._cursor.execute(f"SELECT rowid, * FROM {self._database_name}")
         item = self._cursor.fetchone()
-        print(item)
+        return str(item)
 
     # Add a new record to the table
     def add_one(self, time: str, date: str):
@@ -39,10 +41,12 @@ class Database:
         self._cursor.execute(f"DELETE from {self._database_name} WHERE rowid = (?)", id)
         self._connection.commit()
 
-    def query_between_two_days(self, start_date: str, end_date: str):
+    def query_between_two_days(self, start_date: str, end_date: str) -> str:
         """Showing records between two dates"""
         self._cursor.execute\
             (f"SELECT * FROM sudoku_results WHERE date BETWEEN {start_date} AND {end_date}")
         items = self._cursor.fetchall()
+        items_string: str = ''
         for item in items:
-            print(item)
+            items_string += str(item) + "<br>"
+        return items_string
