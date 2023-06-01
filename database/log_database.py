@@ -38,3 +38,11 @@ class Database:
         """Deleting a record"""
         self._cursor.execute(f"DELETE from {self._database_name} WHERE rowid = (?)", id)
         self._connection.commit()
+
+    def query_between_two_days(self, start_date: str, end_date: str):
+        """Showing records between two dates"""
+        self._cursor.execute\
+            (f"SELECT * FROM sudoku_results WHERE date BETWEEN {start_date} AND {end_date}")
+        items = self._cursor.fetchall()
+        for item in items:
+            print(item)
