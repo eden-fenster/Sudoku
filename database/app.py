@@ -8,6 +8,8 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+# pylint: disable=invalid-name
+
 # List to store received response.
 responses = []
 sudoku_db = Database(database_name='sudoku_results')
@@ -37,11 +39,10 @@ def add_to_database():
 
 # Delete previous records.
 @app.route('/database', methods=['DELETE'])
-def delete_records():
+def delete_records(id_to_delete: str):
     """Deleting from database"""
-    if len(responses) > 1:
-        sudoku_db.delete_one(id='1')
-        logging.debug("record deleted")
+    sudoku_db.delete_one(id=id_to_delete)
+    logging.debug("record deleted")
     return '', 204
 
 

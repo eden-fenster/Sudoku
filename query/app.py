@@ -10,10 +10,16 @@ app = Flask(__name__)
 @app.route('/')
 def get_database():
     """Return our database"""
-    response = requests.get('http://sudoku_database:3000/database')
-    return render_template('results.html', Title='Database') + render_template_string(response.json())
+    response = requests.get('http://sudoku_database:3000/database', timeout=10)
+    return render_template('results.html', Title='Database')\
+        + render_template_string(response.json())
 
-# TODO: Query database between dates.
+
+# Putting a template for when the dates will be received.
+@app.route('/', methods=['POST'])
+def post():
+    """Get dates from user"""
+    return '', 204
 
 
 if __name__ == '__main__':
