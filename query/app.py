@@ -21,6 +21,8 @@ def post():
     """Get dates from user"""
     return '', 204
 
+# TODO: Something similar to the interface in the web container.
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=1000, host='sudoku_query')
