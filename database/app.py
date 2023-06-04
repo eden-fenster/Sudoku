@@ -12,6 +12,7 @@ app = Flask(__name__)
 
 # List to store received response.
 responses = []
+queried_dates = []
 sudoku_db = Database(database_name='sudoku_results')
 
 
@@ -44,6 +45,12 @@ def delete_records(id_to_delete: str):
     sudoku_db.delete_one(id=id_to_delete)
     logging.debug("record deleted")
     return '', 204
+
+
+# Get and Return between queried dates.
+@app.route('/queried', methods=['GET', 'POST'])
+def get_queried():
+    return "Hello"
 
 
 if __name__ == '__main__':
