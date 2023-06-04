@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+</head>
+
+<h1>Input dates to query</h1>
+
+<form action="/queried" method = "POST" enctype = "multipart/form-data">
+  <label for="startdate">Start Date:</label>
+  <input type="text" id="startdate" name="startdate"><br><br>
+  <label for="enddate">End Date:</label>
+  <input type="text" id="enddate" name="enddate"><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+
+</body>
+</html>

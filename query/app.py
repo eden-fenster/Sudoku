@@ -16,12 +16,14 @@ def get_database():
 
 
 # Putting a template for when the dates will be received.
-@app.route('/', methods=['POST'])
+@app.route('/queried', methods=['GET', 'POST'])
 def post():
     """Get dates from user"""
     return '', 204
 
-# TODO: Something similar to the interface in the web container.
+# TODO: Have post receive them.
+# TODO: Have post send them in a RESTful way to database container.
+# TODO: Have the database container get them and return between dates.
 
 
 if __name__ == '__main__':
