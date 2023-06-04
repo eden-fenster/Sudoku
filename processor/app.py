@@ -37,6 +37,7 @@ def add_grids():
     """Solving the sudoku"""
     # Add grid to records.
     grids.append(request.get_json())
+    logging.debug("Received")
     initial_grid = grids[0]["Grid"]
     # Convert input to string.
     initial_string: str = sudoku.print_grid(description="Initial grid", grid=initial_grid)

@@ -2,6 +2,9 @@
 """Sudoku Solver - Database"""
 import json
 import logging
+import re
+from typing import List
+
 from log_database import Database
 from create_database import create
 from flask import Flask, request
@@ -11,8 +14,9 @@ app = Flask(__name__)
 # pylint: disable=invalid-name
 
 # List to store received response.
-responses = []
-queried_dates = []
+responses: List[dict] = []
+queried_dates: List[dict] = []
+queried: List[str] = []
 sudoku_db = Database(database_name='sudoku_results')
 
 
@@ -47,10 +51,29 @@ def delete_records(id_to_delete: str):
     return '', 204
 
 
-# Get and Return between queried dates.
-@app.route('/queried', methods=['GET', 'POST'])
-def get_queried():
-    return "Hello"
+# Get between queried dates.
+@app.route('/queried', methods=['POST'])
+def post_queried():
+    """Getting dates from user"""
+    # Getting dates
+    queried_dates.append(request.get_json())
+    logging.debug("Received")
+    start = queried_dates[len(queried_dates) - 1]["Start"]
+    end = queried_dates[len(queried_dates) - 1]["End"]
+    between_dates = sudoku_db.query_between_two_days(start_date=start, end_date=end)
+    queried.append(between_dates)
+    return '', 204
+
+
+# Return between queried dates.
+@app.route('/queried')
+def get():
+    """Returning the dates"""
+    # Turning grid into a string.
+    results = json.dumps(queried)
+    formatted_grids = re.sub(r"[\[\]]", "", results)
+    # Return results.
+    return json.dumps(formatted_grids)
 
 
 if __name__ == '__main__':
