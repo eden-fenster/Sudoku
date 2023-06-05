@@ -70,10 +70,10 @@ def post_queried():
 def get():
     """Returning the dates"""
     # Turning grid into a string.
-    results = json.dumps(queried)
-    formatted_grids = re.sub(r"[\[\]]", "", results)
+    database = json.dumps(queried)
+    formatted_database = re.sub(r"[\[\]]", "", database)
     # Return results.
-    return json.dumps(formatted_grids)
+    return json.dumps(formatted_database)
 
 
 if __name__ == '__main__':
