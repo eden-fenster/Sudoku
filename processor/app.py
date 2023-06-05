@@ -43,6 +43,7 @@ def add_grids():
     initial_string: str = sudoku.print_grid(description="Initial grid", grid=initial_grid)
     # Getting current date and time
     now = datetime.now()
+    dt_string_for_print = now.strftime("%m/%d/%Y, %H:%M:%S")
     dt_string = now.strftime("%Y/%m/%d")
     start = time.time()
     # Solve the sudoku.
@@ -58,7 +59,7 @@ def add_grids():
         ("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string +
          "<br>Time taken to solve: <br>" + str("%.2f" % total_time) + " seconds<br>"
          + "<br>Current Time: <br>" +
-         dt_string)
+         dt_string_for_print)
     # Adding record to database
     total_time_string: str = str("%.2f" % total_time)
     requests.post("http://sudoku_database:3000/database",

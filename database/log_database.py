@@ -32,7 +32,7 @@ class Database:
     # Add a new record to the table
     def add_one(self, time: str, date: str):
         """Adding a record"""
-        self._cursor.execute\
+        self._cursor.execute \
             (f"INSERT INTO {self._database_name} VALUES (?, ?)", (time, date))
         self._connection.commit()
 
@@ -43,8 +43,8 @@ class Database:
 
     def query_between_two_days(self, start_date: str, end_date: str) -> str:
         """Showing records between two dates"""
-        self._cursor.execute\
-            (f"SELECT * FROM {self._database_name} WHERE date BETWEEN {start_date} AND {end_date}")
+        self._cursor.execute(f"SELECT * FROM {self._database_name} WHERE"
+                             f"DATE_FORMAT(date,'%Y/%m/%d')  BETWEEN {start_date} AND {end_date}")
         items = self._cursor.fetchall()
         items_string: str = ''
         for item in items:
