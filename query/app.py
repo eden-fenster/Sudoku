@@ -20,10 +20,8 @@ def home():
 def return_queried():
     """Return queried"""
     # Getting dates.
-    start = request.form.get('startdate')
-    end = request.form.get('enddate')
-    start_date = start.strftime("%d/%m/%Y")
-    end_date = end.strftime("%d/%m/%Y")
+    start_date = request.form.get('startdate')
+    end_date = request.form.get('enddate')
     logging.debug("The start date is %s and the end date is %s", start_date, end_date)
     # Send to database.
     requests.post('http://sudoku_database:3000/queried', json={"Start": start_date, "End": end_date}, timeout=10)

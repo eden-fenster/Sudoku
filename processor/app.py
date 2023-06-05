@@ -43,7 +43,7 @@ def add_grids():
     initial_string: str = sudoku.print_grid(description="Initial grid", grid=initial_grid)
     # Getting current date and time
     now = datetime.now()
-    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    dt_string = now.strftime("%Y/%m/%d")
     start = time.time()
     # Solve the sudoku.
     solved = sudoku.get_solutions(initial_grid=initial_grid)

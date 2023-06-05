@@ -44,8 +44,7 @@ class Database:
     def query_between_two_days(self, start_date: str, end_date: str) -> str:
         """Showing records between two dates"""
         self._cursor.execute\
-            (f"SELECT * FROM {self._database_name} WHERE"
-             f" DATE_FORMAT(date,'%d/%m/%Y') BETWEEN {start_date} AND {end_date}")
+            (f"SELECT * FROM {self._database_name} WHERE date BETWEEN {start_date} AND {end_date}")
         items = self._cursor.fetchall()
         items_string: str = ''
         for item in items:
