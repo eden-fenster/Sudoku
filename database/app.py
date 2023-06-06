@@ -39,7 +39,7 @@ def add_to_database():
     create(database_name='sudoku_results')
     logging.debug("created")
     # Adding to database
-    sudoku_db.add_one(time=time, date=date)
+    sudoku_db.add_one(time=time, our_date=date)
     return '', 204
 
 
