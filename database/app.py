@@ -3,6 +3,7 @@
 import json
 import logging
 import re
+from datetime import datetime
 from typing import List
 
 from log_database import Database
@@ -33,7 +34,7 @@ def add_to_database():
     # Adding to list.
     responses.append(request.get_json())
     time = responses[len(responses) - 1]["Time"]
-    date = responses[len(responses) - 1]["Date"]
+    date = datetime.strptime(responses[len(responses) - 1]["Date"], '%Y-%m-%d').date()
     # Create database.
     create(database_name='sudoku_results')
     logging.debug("created")
