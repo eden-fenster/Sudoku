@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Database class"""
+import logging
 import sqlite3
 
 
@@ -43,6 +44,7 @@ class Database:
 
     def query_between_two_days(self, start_date: str, end_date: str) -> str:
         """Showing records between two dates"""
+        logging.debug("Received")
         self._cursor.execute\
             (f"SELECT * FROM {self._database_name}"
              f" WHERE strftime('%Y-%m-%d', date) BETWEEN {start_date} AND {end_date}")

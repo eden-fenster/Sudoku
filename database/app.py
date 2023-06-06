@@ -55,7 +55,6 @@ def delete_records(id_to_delete: str):
 @app.route('/queried', methods=['POST'])
 def post_queried():
     """Getting dates from user"""
-    # Getting dates
     queried_dates.append(request.get_json())
     logging.debug("Received")
     start = queried_dates[len(queried_dates) - 1]["Start"]
