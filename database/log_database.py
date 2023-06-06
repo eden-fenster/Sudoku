@@ -2,7 +2,7 @@
 """Database class"""
 import logging
 import sqlite3
-from datetime import datetime, date
+from datetime import datetime
 
 
 # pylint: disable=invalid-name
@@ -32,7 +32,7 @@ class Database:
         return str(item)
 
     # Add a new record to the table
-    def add_one(self, time: str, our_date: date):
+    def add_one(self, time: str, our_date: datetime):
         """Adding a record"""
         self._cursor.execute \
             (f"INSERT INTO {self._database_name} VALUES (?, ?)", (time, our_date))
@@ -46,10 +46,11 @@ class Database:
     def query_between_two_days(self, start_date: str, end_date: str) -> str:
         """Showing records between two dates"""
         logging.debug("Received")
-        start = datetime.strptime(start_date, '%Y-%m-%d').date()
-        end = datetime.strptime(end_date, '%Y-%m-%d').date()
-        self._cursor.execute\
-            (f"SELECT * FROM {self._database_name} WHERE date BETWEEN {start} AND {end}")
+        start = start_date.replace("T", " ")
+        end = end_date.replace("T", " ")
+        # start = datetime.strptime(start_date, '%Y-%m-%d %H:%M')
+        # end = datetime.strptime(end_date, '%Y-%m-%d %H:%M')
+        self._cursor.execute(f"SELECT * FROM {self._database_name} WHERE date BETWEEN {start} AND {end}")
         items = self._cursor.fetchall()
         items_string: str = ''
         for item in items:
