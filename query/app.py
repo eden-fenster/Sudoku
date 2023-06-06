@@ -31,5 +31,13 @@ def return_queried():
         + render_template_string(response.json())
 
 
+@app.route('/database')
+def return_all():
+    """Return all"""
+    response = requests.get('http://sudoku_database:3000/database', timeout=10)
+    logging.debug("Got it !")
+    return render_template('results.html', Title='Full Database') + render_template_string(response.json())
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=1000, host='sudoku_query')
