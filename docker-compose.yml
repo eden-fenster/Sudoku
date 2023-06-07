@@ -32,6 +32,8 @@ services:
 #      - my_network
 
   database:
+    volumes:
+      - "files:/databases"
     build:
       context: .
       dockerfile: database/Dockerfile

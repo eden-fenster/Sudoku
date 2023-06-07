@@ -61,6 +61,7 @@ def post_queried():
     start = queried_dates[len(queried_dates) - 1]["Start"]
     end = queried_dates[len(queried_dates) - 1]["End"]
     between_dates = sudoku_db.query_between_two_days(start_date=start, end_date=end)
+    queried.clear()
     queried.append(between_dates)
     return '', 204
 
