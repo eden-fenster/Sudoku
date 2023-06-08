@@ -32,10 +32,10 @@ class Database:
         return str(item)
 
     # Add a new record to the table
-    def add_one(self, time: str, our_date: datetime):
+    def add_one(self, solution: str, time: str, our_date: datetime):
         """Adding a record"""
         self._cursor.execute \
-            (f"INSERT INTO {self._database_name} VALUES (?, ?)", (time, our_date))
+            (f"INSERT INTO {self._database_name} VALUES (?, ?, ?)", (solution, time, our_date))
         self._connection.commit()
 
     def delete_one(self, id: str):

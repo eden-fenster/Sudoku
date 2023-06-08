@@ -3,6 +3,7 @@
 import json
 import logging
 import re
+import subprocess
 from datetime import datetime
 from typing import List
 
@@ -33,15 +34,16 @@ def add_to_database():
     """Adding to database"""
     # Adding to list.
     responses.append(request.get_json())
+    solution = responses[len(responses) - 1]["Solution"]
     time = responses[len(responses) - 1]["Time"]
     date = datetime.strptime(responses[len(responses) - 1]["Date"], '%Y-%m-%d %H:%M')
     # Create database.
     create(database_name='sudoku_results')
     # Move database.
-    # subprocess.call("./database/move.sh")
+    subprocess.call("./database/move.sh")
     logging.debug("created")
     # Adding to database
-    sudoku_db.add_one(time=time, our_date=date)
+    sudoku_db.add_one(solution=solution, time=time, our_date=date)
     return '', 204
 
 

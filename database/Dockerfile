@@ -22,5 +22,5 @@ EXPOSE 3000
 COPY database/*.py /sudoku_database_directory/database/
 COPY database/*.sh /sudoku_database_directory/database/
 
-CMD ["python3", "./sudoku_database_directory/database/drop_previous_database.py"]
+# CMD ["python3", "./sudoku_database_directory/database/drop_previous_database.py"]
 CMD ["flask", "run", "-p", "3000"]
