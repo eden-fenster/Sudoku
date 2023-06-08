@@ -48,7 +48,8 @@ class Database:
         logging.debug("Received")
         start = start_date.replace("T", " ")
         end = end_date.replace("T", " ")
-        self._cursor.execute(f"SELECT * FROM {self._database_name} WHERE date BETWEEN '{start}' AND '{end}'")
+        self._cursor.execute\
+            (f"SELECT * FROM {self._database_name} WHERE date BETWEEN '{start}' AND '{end}'")
         items = self._cursor.fetchall()
         items_string: str = ''
         for item in items:

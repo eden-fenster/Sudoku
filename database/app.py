@@ -3,7 +3,6 @@
 import json
 import logging
 import re
-import subprocess
 from datetime import datetime
 from typing import List
 
@@ -39,7 +38,7 @@ def add_to_database():
     # Create database.
     create(database_name='sudoku_results')
     # Move database.
-    subprocess.call("./database/move.sh")
+    # subprocess.call("./database/move.sh")
     logging.debug("created")
     # Adding to database
     sudoku_db.add_one(time=time, our_date=date)
