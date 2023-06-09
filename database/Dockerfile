@@ -3,7 +3,6 @@
 FROM python:3.10.6
 
 WORKDIR /sudoku_database_directory
-WORKDIR /files
 
 
 ENV FLASK_APP=database/app.py
@@ -15,6 +14,8 @@ RUN apt-get update
 RUN apt-get install inetutils-ping
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+RUN mkdir /files
+RUN chmod 775 /files
 
 EXPOSE 3000
 
