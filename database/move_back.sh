@@ -2,6 +2,6 @@
 
 FILE=sudoku_results.db
 if test -f "$FILE"; then
-    mv databases/FILE /sudoku_database_directory/database
-    chmod 775 /sudoku_database_directory/database/FILE
+    mv databases/FILE /sudoku_database_directory
+    chmod 775 FILE
 fi
