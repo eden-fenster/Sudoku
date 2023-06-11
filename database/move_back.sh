@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-FILE=/databases/sudoku_results.db
+FILE=sudoku_results.db
 if test -f "$FILE"; then
-    mv FILE /sudoku_database_directory/database
+    mv databases/FILE /sudoku_database_directory/database
+    chmod 775 /sudoku_database_directory/database/FILE
 fi
