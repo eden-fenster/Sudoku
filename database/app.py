@@ -37,13 +37,14 @@ def add_to_database():
     solution = responses[len(responses) - 1]["Solution"]
     time = responses[len(responses) - 1]["Time"]
     date = datetime.strptime(responses[len(responses) - 1]["Date"], '%Y-%m-%d %H:%M')
+    subprocess.call("./database/move_back.sh")
     # Create database.
     create(database_name='sudoku_results')
-    # Move database.
-    subprocess.call("./database/move.sh")
     logging.debug("created")
     # Adding to database
     sudoku_db.add_one(solution=solution, time=time, our_date=date)
+    # Move database.
+    subprocess.call("./database/move.sh")
     return '', 204
 
 

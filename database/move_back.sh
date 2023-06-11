@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-python3 ./database/drop_previous_database.py
+FILE=/databases/sudoku_results.db
+if test -f "$FILE"; then
+    mv FILE /sudoku_database_directory/database
+fi
