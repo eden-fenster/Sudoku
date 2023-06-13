@@ -19,7 +19,7 @@ app = Flask(__name__)
 responses: List[dict] = []
 queried_dates: List[dict] = []
 queried: List[str] = []
-sudoku_db = Database(database_name='sudoku_results')
+sudoku_db = Database(database_name='c://databases/sudoku_results')
 
 
 # Returns the results
@@ -38,10 +38,13 @@ def add_to_database():
     time = responses[len(responses) - 1]["Time"]
     date = datetime.strptime(responses[len(responses) - 1]["Date"], '%Y-%m-%d %H:%M')
     # Create database.
+    subprocess.call("./database/move.sh")
     # create(database_name='sudoku_results')
     # logging.debug("created")
     # Adding to database
     sudoku_db.add_one(solution=solution, time=time, our_date=date)
+    # Move database.
+    # subprocess.call("./database/move.sh")
     return '', 204
 
 
