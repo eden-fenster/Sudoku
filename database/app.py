@@ -8,7 +8,6 @@ from datetime import datetime
 from typing import List
 
 from log_database import Database
-from create_database import create
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -37,14 +36,14 @@ def add_to_database():
     solution = responses[len(responses) - 1]["Solution"]
     time = responses[len(responses) - 1]["Time"]
     date = datetime.strptime(responses[len(responses) - 1]["Date"], '%Y-%m-%d %H:%M')
-    subprocess.call("./database/move_back.sh")
+    # subprocess.call("./database/move_back.sh")
     # Create database.
-    create(database_name='sudoku_results')
-    logging.debug("created")
+    # create(database_name='sudoku_results')
+    # logging.debug("created")
     # Adding to database
     sudoku_db.add_one(solution=solution, time=time, our_date=date)
     # Move database.
-    subprocess.call("./database/move.sh")
+    # subprocess.call("./database/move.sh")
     return '', 204
 
 

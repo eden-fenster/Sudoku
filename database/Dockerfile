@@ -18,8 +18,10 @@ RUN pip install -r requirements.txt
 EXPOSE 3000
 
 # Copy database to directory.
-COPY database/*.py /sudoku_database_directory/database/
-COPY database/*.sh /sudoku_database_directory/database/
+COPY database/app.py /sudoku_database_directory/database/
+COPY database/log_database.py /sudoku_database_directory/database/
+COPY database/create_database.py /databases/
 
-# CMD ["python3", "./sudoku_database_directory/database/drop_previous_database.py"]
+
+CMD ["python3", "./create_database.py"]
 CMD ["flask", "run", "-p", "3000"]
