@@ -21,7 +21,9 @@ EXPOSE 3000
 COPY database/app.py /sudoku_database_directory/database/
 COPY database/log_database.py /sudoku_database_directory/database/
 COPY database/create_database.py /databases/
+COPY database/create_sudoku_results.py /databases/
+COPY database/move.sh /sudoku_database_directory/database/
 
 
-CMD ["python3", "./create_database.py"]
+# CMD ["python3", "./create_database.py"]
 CMD ["flask", "run", "-p", "3000"]

@@ -36,8 +36,8 @@ def add_to_database():
     solution = responses[len(responses) - 1]["Solution"]
     time = responses[len(responses) - 1]["Time"]
     date = datetime.strptime(responses[len(responses) - 1]["Date"], '%Y-%m-%d %H:%M')
-    # subprocess.call("./database/move_back.sh")
     # Create database.
+    subprocess.call("./database/move.sh")
     # create(database_name='sudoku_results')
     # logging.debug("created")
     # Adding to database
