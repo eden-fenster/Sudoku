@@ -2,7 +2,11 @@ body {
      background-color: black;
      color: white;
      font-family: "Lucida Console", "Courier New", monospace;
+     border-style: outset;
+     width: 350px;
      text-align: center;
+     margin-left: auto;
+    margin-right: auto;
    }
    script {
    color: white;
@@ -22,13 +26,9 @@ body {
    }
    form {
      color: white;
+     margin-left: 0px;
      font-family: "Lucida Console", "Courier New", monospace;
      text-align: center;
-     border-style: outset;
-     width: 350px;
-     display: block;
-    margin-left: auto;
-    margin-right: auto;
    }
    p {
      color: white;
