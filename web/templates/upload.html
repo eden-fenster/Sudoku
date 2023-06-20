@@ -9,14 +9,14 @@
       <h2>This web page will solve your sudoku for you !</h2>
       <h4>Steps:</h4>
       <h4>1. Upload a text file that has an unsolved sudoku in it here.</h4>
-      <form action = "/results" method = "POST"
+      <form id = "sudoku" action = "/results" method = "POST"
          enctype = "multipart/form-data">
          <input type = "file" name = "file" accept=".txt"/>
          <input type = "submit" value="Upload"/>
       </form>
       <h4>2. Wait.</h4>
       <h4>3. Enjoy your solved sudoku.</h4>
-   <form action="http://sudoku_query:1000/">
+   <form id = "database" action="http://sudoku_query:1000/">
          <button type="submit">Search in database</button>
       </form>
 
