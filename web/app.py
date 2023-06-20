@@ -47,7 +47,8 @@ def post():
     get_response = requests.get("http://sudoku_processor:8000/grids", timeout=10)
     # Return response.
     response = get_response.json()
-    return render_template('results.html', Title='Results') + render_template_string(response)
+    return render_template('results.html', Title='Results', Second='Here are the results')\
+        + render_template_string(response)
 
 
 if __name__ == '__main__':

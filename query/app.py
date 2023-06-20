@@ -27,7 +27,8 @@ def return_queried():
     requests.post('http://sudoku_database:3000/queried', json={"Start": start_date, "End": end_date}, timeout=10)
     logging.debug("Sent")
     response = requests.get('http://sudoku_database:3000/queried', timeout=10)
-    return render_template('results.html', Title='Queried Database') \
+    return render_template('results.html', Title='Queried Database',
+                           Second='Here are the records between the two dates') \
         + render_template_string(response.json())
 
 
