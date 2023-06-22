@@ -33,7 +33,7 @@ services:
 
   database:
     volumes:
-      - "./files:/databases"
+      - ./files:/databases
     build:
       context: .
       dockerfile: database/Dockerfile
