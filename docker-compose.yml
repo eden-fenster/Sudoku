@@ -33,7 +33,7 @@ services:
 
   database:
     volumes:
-      - ./files:/databases
+      - .sudoku_database_directory/database:/our_database
     build:
       context: .
       dockerfile: database/Dockerfile

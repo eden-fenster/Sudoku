@@ -22,13 +22,13 @@ responses: List[dict] = []
 queried_dates: List[dict] = []
 queried: List[str] = []
 # Create database.
-# create_path = os.path.join("/files/databases/", "move.sh")
-# # create_path = os.path.abspath("move.sh")
-# subprocess.call(f"{create_path}")
+create_path = os.path.join("database", "move.sh")
+subprocess.call(f"{create_path}")
 # path = os.path.join("/files/databases/", "sudoku_results.db")
+path = os.path.join("database", "sudoku_results")
 # # data = shelve.open(path, flag="c")
 # data_write = shelve.open(path, flag="c")
-sudoku_db = Database(database_name="/files/sudoku_results.db")
+sudoku_db = Database(database_name=f"{path}")
 
 
 # Returns the results
