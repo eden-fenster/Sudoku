@@ -2,7 +2,9 @@
 """Sudoku Solver - Database"""
 import json
 import logging
+import os
 import re
+import shelve
 import subprocess
 from datetime import datetime
 from typing import List
@@ -19,7 +21,14 @@ app = Flask(__name__)
 responses: List[dict] = []
 queried_dates: List[dict] = []
 queried: List[str] = []
-sudoku_db = Database(database_name='C:\\files\\databases\\sudoku_results.db')
+# Create database.
+# create_path = os.path.join("/files/databases/", "move.sh")
+# # create_path = os.path.abspath("move.sh")
+# subprocess.call(f"{create_path}")
+# path = os.path.join("/files/databases/", "sudoku_results.db")
+# # data = shelve.open(path, flag="c")
+# data_write = shelve.open(path, flag="c")
+sudoku_db = Database(database_name="/files/sudoku_results.db")
 
 
 # Returns the results
@@ -37,8 +46,6 @@ def add_to_database():
     solution = responses[len(responses) - 1]["Solution"]
     time = responses[len(responses) - 1]["Time"]
     date = datetime.strptime(responses[len(responses) - 1]["Date"], '%Y-%m-%d %H:%M')
-    # Create database.
-    subprocess.call("/files/databases/move.sh")
     # create(database_name='sudoku_results')
     logging.debug("created")
     # Adding to database
