@@ -24,10 +24,7 @@ queried: List[str] = []
 # Create database.
 create_path = os.path.join("database", "move.sh")
 subprocess.call(f"{create_path}")
-# path = os.path.join("/files/databases/", "sudoku_results.db")
 path = os.path.join("database", "sudoku_results")
-# # data = shelve.open(path, flag="c")
-# data_write = shelve.open(path, flag="c")
 sudoku_db = Database(database_name=f"{path}")
 
 
