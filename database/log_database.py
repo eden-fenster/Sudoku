@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Database class"""
 import logging
+import os
 import sqlite3
 from datetime import datetime
 
@@ -13,7 +14,8 @@ class Database:
 
     def __init__(self, database_name: str):
         self._database_name = database_name
-        self._connection = sqlite3.connect(f'{database_name}.db', check_same_thread=False)
+        self._full_path = os.path.join(os.getcwd(), database_name)
+        self._connection = sqlite3.connect(f'{self._full_path}.db', check_same_thread=False)
         self._cursor = self._connection.cursor()
 
     def get_connection_status(self) -> bool:

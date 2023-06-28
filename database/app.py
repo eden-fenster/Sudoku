@@ -24,8 +24,7 @@ queried: List[str] = []
 # Create database.
 create_path = os.path.join("database", "move.sh")
 subprocess.call(f"{create_path}")
-path = os.path.join(os.getcwd(), "sudoku_results")
-sudoku_db = Database(database_name=f"{path}")
+sudoku_db = Database(database_name="sudoku_results")
 
 
 # Returns the results
