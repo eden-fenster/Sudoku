@@ -4,7 +4,6 @@ import json
 import logging
 import os
 import re
-import shelve
 import subprocess
 from datetime import datetime
 from typing import List
@@ -46,6 +45,8 @@ def add_to_database():
     # create(database_name='sudoku_results')
     logging.debug("created")
     # Adding to database
+    print(date)
+    logging.debug("Solution -> %s \n Time -> %s \n Date -> %s", solution, time, date)
     sudoku_db.add_one(solution=solution, time=time, our_date=date)
     return '', 204
 
