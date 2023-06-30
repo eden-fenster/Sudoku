@@ -9,7 +9,6 @@ from datetime import datetime
 from typing import List
 
 from log_database import Database
-# from create_database import create
 from flask import Flask, request
 
 app = Flask(__name__)

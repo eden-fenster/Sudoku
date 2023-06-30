@@ -29,7 +29,7 @@ COPY database/create_database.py /sudoku_database_directory/database/create_data
 COPY database/create_sudoku_results.py /sudoku_database_directory/database/create_sudoku_results.py
 
 CMD ["cd.."]
-
+CMD ["python3", "./create_sudoku_results.py"]
 WORKDIR /sudoku_database_directory
 
 CMD ["flask", "run", "-p", "3000"]
