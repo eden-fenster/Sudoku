@@ -8,8 +8,7 @@ import sqlite3
 
 def create(database_name: str):
     """Creating a database"""
-    full_path = f"sudoku_database_directory/database/{database_name}"
-    conn = sqlite3.connect(f'{full_path}.db', check_same_thread=False)
+    conn = sqlite3.connect(f'{database_name}.db', check_same_thread=False)
     c = conn.cursor()
     command = f"""CREATE TABLE IF NOT EXISTS {database_name} (
     solution text,

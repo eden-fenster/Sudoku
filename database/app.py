@@ -21,9 +21,9 @@ responses: List[dict] = []
 queried_dates: List[dict] = []
 queried: List[str] = []
 # Create database.
-create_path = os.path.join("database", "move.sh")
-subprocess.call(f"{create_path}")
-sudoku_db = Database(database_name="sudoku_results")
+# create_path = os.path.join("database", "move.sh")
+# subprocess.call(f"{create_path}")
+sudoku_db = Database(database_name='sudoku_results')
 
 
 # Returns the results
