@@ -2,18 +2,16 @@
 """Sudoku Solver - Database"""
 import json
 import logging
-import os
 import re
 import sys
-import subprocess
+
 
 from datetime import datetime
 from typing import List
 
 from log_database import Database
 from flask import Flask, request
-sys.path.append("sudoku_database_directory/database")
-from create_database import create
+
 
 
 app = Flask(__name__)
@@ -46,6 +44,8 @@ def add_to_database():
     solution = responses[len(responses) - 1]["Solution"]
     time = responses[len(responses) - 1]["Time"]
     date = datetime.strptime(responses[len(responses) - 1]["Date"], '%Y-%m-%d %H:%M')
+    sys.path.append("/sudoku_database_directory/database/")
+    from create_database import create
     create(database_name='sudoku_results')
     logging.debug("created")
     # Adding to database

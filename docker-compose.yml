@@ -28,8 +28,7 @@ services:
       - 8000
     container_name: sudoku_processor
     hostname: sudoku_processor
-#    networks:
-#      - my_network
+
 
   database:
     volumes:
