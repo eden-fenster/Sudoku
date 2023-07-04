@@ -5,7 +5,7 @@ import os
 import sqlite3
 from datetime import datetime
 
-# this one
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 # pylint: disable=invalid-name
 # pylint: disable=redefined-builtin
 
