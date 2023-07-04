@@ -21,15 +21,15 @@ WORKDIR ../app
 COPY database/app.py /sudoku_database_directory/app/app.py
 COPY database/log_database.py /sudoku_database_directory/app/log_database.py
 
-#CMD ["cd.."]
+CMD ["cd.."]
 
 WORKDIR ../database
 COPY database/move.sh /sudoku_database_directory/database/move.sh
 COPY database/create_database.py /sudoku_database_directory/database/create_database.py
 COPY database/create_sudoku_results.py /sudoku_database_directory/database/create_sudoku_results.py
-#CMD ["cd database"]
-#CMD ["python3", "/database/create_sudoku_results.py"]
-#CMD ["cd.."]
+
+CMD ["cd.."]
+CMD ["python3", "./create_sudoku_results.py"]
 WORKDIR /sudoku_database_directory
 
 CMD ["flask", "run", "-p", "3000"]
