@@ -20,6 +20,7 @@ WORKDIR ../app
 # Copy database to directory.
 COPY database/app.py /sudoku_database_directory/app/app.py
 COPY database/log_database.py /sudoku_database_directory/app/log_database.py
+COPY database/storage.py /sudoku_database_directory/app/storage.py
 
 
 WORKDIR ../database
