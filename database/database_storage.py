@@ -22,18 +22,22 @@ class Storage:
         self._queried: List[str] = []
         self._db = Database(directory=f'{directory}', database_name=f'{database_name}')
 
-    def get_responses(self) -> List[dict]:
+    @property
+    def responses(self) -> List[dict]:
         """Return responses"""
         return self._responses
 
-    def get_queried_dates(self) -> List[dict]:
+    @property
+    def queried_dates(self) -> List[dict]:
         """Return dates to query"""
         return self._queried_dates
 
-    def get_queried(self) -> List[dict]:
+    @property
+    def queried(self) -> List[str]:
         """Return queried dates"""
         return self._queried
 
-    def get_database(self):
+    @property
+    def database(self):
         """Return database"""
         return self._db

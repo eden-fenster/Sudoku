@@ -13,10 +13,12 @@ class Storage:
         # List to store the returned results.
         self._grid_strings: List[str] = []
 
-    def get_grids(self) -> List[List[int]]:
+    @property
+    def grids(self) -> List[List[int]]:
         """Return grid list"""
         return self._grids
 
-    def get_grid_strings(self) -> List[str]:
+    @property
+    def grid_strings(self) -> List[str]:
         """Return string of results"""
         return self._grid_strings

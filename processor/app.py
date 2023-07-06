@@ -9,7 +9,7 @@ from datetime import datetime
 import requests
 from flask import Flask, request
 from processor import sudoku
-from processor.storage import Storage
+from processor.processor_storage import Storage
 
 # pylint: disable=consider-using-f-string
 
@@ -25,7 +25,7 @@ grids_to_return: Storage = Storage()
 def get_grids():
     """Returning the results"""
     # Turning grid into a string.
-    results = json.dumps(grids_to_return.get_grid_strings())
+    results = json.dumps(grids_to_return.grid_strings)
     formatted_grids = re.sub(r"[\[\]]", "", results)
     # Return results.
     return json.dumps(formatted_grids)
@@ -35,9 +35,9 @@ def get_grids():
 def add_grids():
     """Solving the sudoku"""
     # Add grid to records.
-    grids_to_return.get_grids().append(request.get_json())
+    grids_to_return.grids.append(request.get_json())
     logging.debug("Received")
-    initial_grid = grids_to_return.get_grids()[0]["Grid"]
+    initial_grid = grids_to_return.grids[0]["Grid"]
     # Convert input to string.
     initial_string: str = sudoku.print_grid(description="Initial grid", grid=initial_grid)
     # Getting current date and time
@@ -51,10 +51,10 @@ def add_grids():
     total_time = end - start
     solved_string: str = sudoku.print_grid(description="Solved grid", grid=solved)
     # Clears list from previous attempts
-    grids_to_return.get_grid_strings().clear()
+    grids_to_return.grid_strings.clear()
     # Add to list.
     logging.debug("Adding %s to list", solved_string)
-    grids_to_return.get_grid_strings().append\
+    grids_to_return.grid_strings.append\
         ("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string +
          "<br>Time taken to solve: <br>" + str("%.2f" % total_time) + " seconds<br>"
          + "<br>Current Time: <br>" +
@@ -72,8 +72,8 @@ def add_grids():
 @app.route('/grids', methods=['DELETE'])
 def delete_grids():
     """Deleting old grids"""
-    grids_to_return.get_grids().clear()
-    grids_to_return.get_grid_strings().clear()
+    grids_to_return.grids.clear()
+    grids_to_return.grid_strings.clear()
     return '', 204
 
 
