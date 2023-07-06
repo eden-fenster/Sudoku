@@ -5,14 +5,11 @@ import logging
 import re
 import sys
 
-
 from datetime import datetime
 from typing import List
 
 from log_database import Database
 from flask import Flask, request
-
-
 
 app = Flask(__name__)
 
@@ -23,10 +20,7 @@ logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 responses: List[dict] = []
 queried_dates: List[dict] = []
 queried: List[str] = []
-# Create database.
-# create_path = os.path.join("database", "move.sh")
-# subprocess.call(f"{create_path}")
-sudoku_db = Database(database_name='sudoku_results')
+sudoku_db = Database(directory='database', database_name='sudoku_results')
 
 
 # Returns the results
@@ -46,7 +40,7 @@ def add_to_database():
     date = datetime.strptime(responses[len(responses) - 1]["Date"], '%Y-%m-%d %H:%M')
     sys.path.append("/sudoku_database_directory/database/")
     from create_database import create
-    create(database_name='sudoku_results')
+    create(directory='database', database_name='sudoku_results')
     logging.debug("created")
     # Adding to database
     print(date)

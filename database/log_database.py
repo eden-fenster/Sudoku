@@ -12,9 +12,9 @@ logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 class Database:
     """The Database"""
 
-    def __init__(self, database_name: str):
+    def __init__(self, directory: str, database_name: str):
         self._database_name = database_name
-        self._full_path = os.path.join("database", database_name)
+        self._full_path = os.path.join(directory, database_name)
         self._connection = sqlite3.connect(f'{self._full_path}.db', check_same_thread=False)
         self._cursor = self._connection.cursor()
 

@@ -6,9 +6,9 @@ import sqlite3
 # pylint: disable=invalid-name
 
 
-def create(database_name: str):
+def create(directory: str, database_name: str):
     """Creating a database"""
-    full_path = os.path.join("database", database_name)
+    full_path = os.path.join(directory, database_name)
     conn = sqlite3.connect(f'{full_path}.db', check_same_thread=False)
     c = conn.cursor()
     command = f"""CREATE TABLE IF NOT EXISTS {database_name} (
