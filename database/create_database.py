@@ -8,7 +8,8 @@ import sqlite3
 
 def create(database_name: str):
     """Creating a database"""
-    conn = sqlite3.connect(f'{database_name}.db', check_same_thread=False)
+    full_path = os.path.join("database", database_name)
+    conn = sqlite3.connect(f'{full_path}.db', check_same_thread=False)
     c = conn.cursor()
     command = f"""CREATE TABLE IF NOT EXISTS {database_name} (
     solution text,
