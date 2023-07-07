@@ -3,55 +3,42 @@
 import json
 import logging
 import re
-import sys
-
 
 from datetime import datetime
-from typing import List
+from database_storage import Storage
 
-from log_database import Database
 from flask import Flask, request
 
-
+DATABASE_DIRECTORY: str = 'database'
+DATABASE_NAME: str = 'sudoku_results'
 
 app = Flask(__name__)
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 # pylint: disable=invalid-name
 
-# List to store received response.
-responses: List[dict] = []
-queried_dates: List[dict] = []
-queried: List[str] = []
-# Create database.
-# create_path = os.path.join("database", "move.sh")
-# subprocess.call(f"{create_path}")
-sudoku_db = Database(database_name='sudoku_results')
+# A class with all of our things
+sudoku: Storage = Storage(directory=DATABASE_DIRECTORY, database_name=DATABASE_NAME)
 
 
 # Returns the results
 @app.route('/database')
 def get_database():
     """Getting from database"""
-    return json.dumps(sudoku_db.show_all())
+    return json.dumps(sudoku.database.show_all())
 
 
 @app.route('/database', methods=['POST'])
 def add_to_database():
     """Adding to database"""
     # Adding to list.
-    responses.append(request.get_json())
-    solution = responses[len(responses) - 1]["Solution"]
-    time = responses[len(responses) - 1]["Time"]
-    date = datetime.strptime(responses[len(responses) - 1]["Date"], '%Y-%m-%d %H:%M')
-    sys.path.append("/sudoku_database_directory/database/")
-    from create_database import create
-    create(database_name='sudoku_results')
-    logging.debug("created")
+    sudoku.responses.append(request.get_json())
+    solution = sudoku.responses[len(sudoku.responses) - 1]["Solution"]
+    time = sudoku.responses[len(sudoku.responses) - 1]["Time"]
+    date = datetime.strptime(sudoku.responses[len(sudoku.responses) - 1]["Date"], '%Y-%m-%d %H:%M')
     # Adding to database
-    print(date)
     logging.debug("Solution -> %s \n Time -> %s \n Date -> %s", solution, time, date)
-    sudoku_db.add_one(solution=solution, time=time, our_date=date)
+    sudoku.database.add_one(solution=solution, time=time, our_date=date)
     return '', 204
 
 
@@ -59,7 +46,7 @@ def add_to_database():
 @app.route('/database', methods=['DELETE'])
 def delete_records(id_to_delete: str):
     """Deleting from database"""
-    sudoku_db.delete_one(id=id_to_delete)
+    sudoku.database.delete_one(id=id_to_delete)
     logging.debug("record deleted")
     return '', 204
 
@@ -68,13 +55,13 @@ def delete_records(id_to_delete: str):
 @app.route('/queried', methods=['POST'])
 def post_queried():
     """Getting dates from user"""
-    queried_dates.append(request.get_json())
+    sudoku.queried_dates.append(request.get_json())
     logging.debug("Received")
-    start = queried_dates[len(queried_dates) - 1]["Start"]
-    end = queried_dates[len(queried_dates) - 1]["End"]
-    between_dates = sudoku_db.query_between_two_days(start_date=start, end_date=end)
-    queried.clear()
-    queried.append(between_dates)
+    start = sudoku.queried_dates[len(sudoku.queried_dates) - 1]["Start"]
+    end = sudoku.queried_dates[len(sudoku.queried_dates) - 1]["End"]
+    between_dates = sudoku.database.query_between_two_days(start_date=start, end_date=end)
+    sudoku.queried.clear()
+    sudoku.queried.append(between_dates)
     return '', 204
 
 
@@ -83,7 +70,7 @@ def post_queried():
 def get():
     """Returning the dates"""
     # Turning grid into a string.
-    database = json.dumps(queried)
+    database = json.dumps(sudoku.queried)
     formatted_database = re.sub(r"[\[\]]", "", database)
     # Return results.
     return json.dumps(formatted_database)
