@@ -26,6 +26,7 @@ def get_grids():
     """Returning the results"""
     # Turning grid into a string.
     results = json.dumps(grids_to_return.grid_strings)
+    logging.debug("formatting the grid")
     formatted_grids = re.sub(r"[\[\]]", "", results)
     # Return results.
     return json.dumps(formatted_grids)
@@ -36,24 +37,29 @@ def add_grids():
     """Solving the sudoku"""
     # Add grid to records.
     grids_to_return.grids.append(request.get_json())
-    logging.debug("Received")
-    initial_grid = grids_to_return.grids[0]["Grid"]
+    logging.debug("Received the grid")
+    initial_grid = grids_to_return.grids[len(grids_to_return.grids) - 1]["Grid"]
     # Convert input to string.
+    logging.debug("Sending grid to be formatted to string")
     initial_string: str = sudoku.print_grid(description="Initial grid", grid=initial_grid)
     # Getting current date and time
+    logging.debug("Getting current date and time")
     now = datetime.now()
     dt_string_for_print = now.strftime("%m/%d/%Y, %H:%M:%S")
     dt_string = now.strftime("%Y-%m-%d %H:%M")
     start = time.time()
     # Solve the sudoku.
+    logging.debug("Solving the sudoku")
     solved = sudoku.get_solutions(initial_grid=initial_grid)
     end = time.time()
     total_time = end - start
+    logging.debug("Sending sudoku to be formatted to print")
     solved_string: str = sudoku.print_grid(description="Solved grid", grid=solved)
     # Clears list from previous attempts
+    logging.debug("Clearing list from previous attempts")
     grids_to_return.grid_strings.clear()
     # Add to list.
-    logging.debug("Adding %s to list", solved_string)
+    logging.debug("Adding %s to returned list", solved_string)
     grids_to_return.grid_strings.append\
         ("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string +
          "<br>Time taken to solve: <br>" + str("%.2f" % total_time) + " seconds<br>"
@@ -64,7 +70,7 @@ def add_grids():
     requests.post("http://sudoku_database:3000/database",
                   json={"Solution": "Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string,
                         "Time": total_time_string, "Date": dt_string}, timeout=10)
-    logging.debug("Added to database")
+    logging.debug("Added record to database")
     return '', 204
 
 
