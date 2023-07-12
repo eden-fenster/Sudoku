@@ -19,4 +19,4 @@ def create(directory: str, database_name: str):
     )"""
     c.execute(command)
     conn.commit()
-    logging.debug("Database created")
+    logging.debug(f"Database created in {full_path}")

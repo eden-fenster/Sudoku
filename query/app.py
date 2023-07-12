@@ -21,15 +21,16 @@ def home():
 @app.route('/queried', methods=['GET', 'POST'])
 def return_queried():
     """Return queried"""
-    logging.debug("Received dates")
     # Getting dates.
     start_date = request.form.get('startdate')
     end_date = request.form.get('enddate')
-    logging.debug("The start date is %s and the end date is %s", start_date, end_date)
+    logging.debug("Received dates\nThe start date is %s and the end date is %s", start_date, end_date)
     # Send to database.
-    requests.post('http://sudoku_database:3000/queried', json={"Start": start_date, "End": end_date}, timeout=10)
-    logging.debug("Sent dates to be queried")
+    dates_to_send: dict = {"Start": start_date, "End": end_date}
+    requests.post('http://sudoku_database:3000/queried', json=dates_to_send, timeout=10)
+    logging.debug(f"Sent dates {dates_to_send} to be queried")
     response = requests.get('http://sudoku_database:3000/queried', timeout=10)
+    logging.debug("Received queried dates back")
     return render_template('results.html', Title='Queried Database',
                            Second='Here are the records between the two dates') \
         + render_template_string(response.json())
