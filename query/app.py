@@ -4,6 +4,7 @@ import logging
 
 import requests
 from flask import Flask, render_template, render_template_string, request
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 app = Flask(__name__)
 
@@ -12,6 +13,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     """Get dates"""
+    logging.debug("Displaying dates page")
     return render_template('dates.html')
 
 
@@ -22,11 +24,13 @@ def return_queried():
     # Getting dates.
     start_date = request.form.get('startdate')
     end_date = request.form.get('enddate')
-    logging.debug("The start date is %s and the end date is %s", start_date, end_date)
+    logging.debug("Received dates\nThe start date is %s and the end date is %s", start_date, end_date)
     # Send to database.
-    requests.post('http://sudoku_database:3000/queried', json={"Start": start_date, "End": end_date}, timeout=10)
-    logging.debug("Sent")
+    dates_to_send: dict = {"Start": start_date, "End": end_date}
+    requests.post('http://sudoku_database:3000/queried', json=dates_to_send, timeout=10)
+    logging.debug(f"Sent dates {dates_to_send} to be queried")
     response = requests.get('http://sudoku_database:3000/queried', timeout=10)
+    logging.debug("Received queried dates back")
     return render_template('results.html', Title='Queried Database',
                            Second='Here are the records between the two dates') \
         + render_template_string(response.json())
@@ -36,7 +40,7 @@ def return_queried():
 def return_all():
     """Return all"""
     response = requests.get('http://sudoku_database:3000/database', timeout=10)
-    logging.debug("Got it !")
+    logging.debug("Returning all dates")
     return render_template('results.html', Title='Full Database') + render_template_string(response.json())
 
 

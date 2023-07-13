@@ -18,6 +18,7 @@ def read_file(file_to_open: str) -> List[str]:
     except OSError as exception:
         logging.error('Unable to open file %s: %s', file_to_open, exception)
         return []
+    logging.debug(f"File {list_of_lines} has been read")
     return list_of_lines
 
 
@@ -42,4 +43,5 @@ def create_sudoku(list_of_lines: List[str]) -> List[List[int]]:
     for line in list_of_lines:
         sudoku_line = create_sudoku_line(line=line)
         sudoku.append(sudoku_line)
+    logging.debug(f"Grid {sudoku} created")
     return sudoku
