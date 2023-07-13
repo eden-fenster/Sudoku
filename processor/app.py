@@ -11,6 +11,8 @@ from flask import Flask, request
 from processor import sudoku
 from processor.processor_storage import Storage
 
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+
 # pylint: disable=consider-using-f-string
 
 app = Flask(__name__)
@@ -43,15 +45,15 @@ def add_grids():
     initial_string: str = sudoku.print_grid(description="Initial grid", grid=initial_grid)
     # Getting current date and time
     logging.debug("Getting current date and time")
-    now = datetime.now()
-    dt_string_for_print = now.strftime("%m/%d/%Y, %H:%M:%S")
-    dt_string = now.strftime("%Y-%m-%d %H:%M")
-    start = time.time()
+    current_time = datetime.now()
+    time_string_for_print = current_time.strftime("%m/%d/%Y, %H:%M:%S")
+    time_string = current_time.strftime("%Y-%m-%d %H:%M")
+    start_time = time.time()
     # Solve the sudoku.
-    solved = sudoku.get_solutions(initial_grid=initial_grid)
+    solved = sudoku.get_sudoku_solutions(initial_grid=initial_grid)
     logging.debug(f"solved sudoku {solved}")
-    end = time.time()
-    total_time = end - start
+    end_time = time.time()
+    total_time = end_time - start_time
     logging.debug(f"Sending sudoku {solved} to be formatted to print")
     solved_string: str = sudoku.print_grid(description="Solved grid", grid=solved)
     # Clears list from previous attempts
@@ -63,12 +65,12 @@ def add_grids():
         ("Initial Grid: <br>" + initial_string + "<br>Solved Grid: <br>" + solved_string +
          "<br>Time taken to solve: <br>" + str("%.2f" % total_time) + " seconds<br>"
          + "<br>Current Time: <br>" +
-         dt_string_for_print)
+         time_string_for_print)
     # Adding record to database
     total_time_string: str = str("%.2f" % total_time)
     database_record: dict = {"Solution": "Initial Grid: <br>" + initial_string +
                                          "<br>Solved Grid: <br>" + solved_string,
-                             "Time": total_time_string, "Date": dt_string}
+                             "Time": total_time_string, "Date": time_string}
     requests.post("http://sudoku_database:3000/database",
                   json=database_record, timeout=10)
     logging.debug(f"Added record {database_record} to database")

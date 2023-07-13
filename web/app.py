@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Sudoku Solver - Web"""
 import logging
-import socket
 import sys
 from typing import List
 from flask import Flask, request, render_template, render_template_string
 import requests
 from web import sudoku
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 
 # create an instance of flask

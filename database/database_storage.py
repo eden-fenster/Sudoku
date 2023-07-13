@@ -18,8 +18,8 @@ class Storage:
         logging.debug("created")
         # Variables.
         self._responses: List[dict] = []
-        self._queried_dates: List[dict] = []
-        self._queried: List[str] = []
+        self._dates_to_query: List[dict] = []
+        self._queried_dates: List[str] = []
         self._db = Database(directory=f'{directory}', database_name=f'{database_name}')
 
     @property
@@ -28,14 +28,14 @@ class Storage:
         return self._responses
 
     @property
-    def queried_dates(self) -> List[dict]:
+    def dates_to_query(self) -> List[dict]:
         """Return dates to query"""
-        return self._queried_dates
+        return self._dates_to_query
 
     @property
-    def queried(self) -> List[str]:
+    def queried_dates(self) -> List[str]:
         """Return queried dates"""
-        return self._queried
+        return self._queried_dates
 
     @property
     def database(self):

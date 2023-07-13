@@ -55,13 +55,13 @@ def delete_records(id_to_delete: str):
 @app.route('/queried', methods=['POST'])
 def post_queried():
     """Getting dates from user"""
-    sudoku.queried_dates.append(request.get_json())
-    logging.debug("Received")
-    start = sudoku.queried_dates[len(sudoku.queried_dates) - 1]["Start"]
-    end = sudoku.queried_dates[len(sudoku.queried_dates) - 1]["End"]
+    sudoku.dates_to_query.append(request.get_json())
+    logging.debug("Received dates to query")
+    start = sudoku.dates_to_query[len(sudoku.dates_to_query) - 1]["Start"]
+    end = sudoku.dates_to_query[len(sudoku.dates_to_query) - 1]["End"]
     between_dates = sudoku.database.query_between_two_days(start_date=start, end_date=end)
-    sudoku.queried.clear()
-    sudoku.queried.append(between_dates)
+    sudoku.queried_dates.clear()
+    sudoku.queried_dates.append(between_dates)
     return '', 204
 
 
@@ -70,7 +70,7 @@ def post_queried():
 def get():
     """Returning the dates"""
     # Turning grid into a string.
-    database = json.dumps(sudoku.queried)
+    database = json.dumps(sudoku.queried_dates)
     formatted_database = re.sub(r"[\[\]]", "", database)
     # Return results.
     return json.dumps(formatted_database)
