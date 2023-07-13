@@ -48,7 +48,6 @@ class Database:
         if not self.get_connection_status():
             raise sqlite3.OperationalError("Can't connect to table")
         logging.debug("%s, %s, %s", solution, time, our_date)
-        print(f"{solution}, {time}, {our_date}")
         self._cursor.execute(f"INSERT INTO {self._database_name} VALUES (?, ?, ?)", (solution, time, our_date))
         self._connection.commit()
 
@@ -59,7 +58,7 @@ class Database:
 
     def query_between_two_days(self, start_date: str, end_date: str) -> str:
         """Showing records between two dates"""
-        logging.debug("Received")
+        logging.debug("Received dates to query")
         start = start_date.replace("T", " ")
         end = end_date.replace("T", " ")
         self._cursor.execute\
