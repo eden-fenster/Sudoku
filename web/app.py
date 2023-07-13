@@ -8,6 +8,8 @@ import requests
 from web import sudoku
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
+PROCESSOR_SERVER: str = "sudoku_processor"
+PROCESSOR_PORT: str = "8000"
 
 # create an instance of flask
 app = Flask(__name__)
@@ -44,12 +46,12 @@ def post():
     initial_grid: List[List[int]] = sudoku.create_sudoku(read_file)
     # Delete previous records.
     logging.debug("Deleting previous records")
-    requests.delete("http://sudoku_processor:8000/grids", timeout=10)
+    requests.delete(f"http://{PROCESSOR_SERVER}:{PROCESSOR_PORT}/grids", timeout=10)
     # Send parameter to processor.
     grid_to_send: dict = {"Grid": initial_grid}
     logging.debug(f"Sending sudoku {grid_to_send} to processor")
-    requests.post("http://sudoku_processor:8000/grids", json=grid_to_send, timeout=10)
-    get_response = requests.get("http://sudoku_processor:8000/grids", timeout=10)
+    requests.post(f"http://{PROCESSOR_SERVER}:{PROCESSOR_PORT}/grids", json=grid_to_send, timeout=10)
+    get_response = requests.get(f"http://{PROCESSOR_SERVER}:{PROCESSOR_PORT}/grids", timeout=10)
     # Return response.
     response = get_response.json()
     logging.debug(f"Getting and returning response {get_response} from processor")

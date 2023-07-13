@@ -13,6 +13,9 @@ from processor.processor_storage import Storage
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
+DATABASE_SERVER: str = "sudoku_database"
+DATABASE_PORT: str = "3000"
+
 # pylint: disable=consider-using-f-string
 
 app = Flask(__name__)
@@ -71,7 +74,7 @@ def add_grids():
     database_record: dict = {"Solution": "Initial Grid: <br>" + initial_string +
                                          "<br>Solved Grid: <br>" + solved_string,
                              "Time": total_time_string, "Date": time_string}
-    requests.post("http://sudoku_database:3000/database",
+    requests.post(f"http://{DATABASE_SERVER}:{DATABASE_PORT}/database",
                   json=database_record, timeout=10)
     logging.debug(f"Added record {database_record} to database")
     return '', 204
