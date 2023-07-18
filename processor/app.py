@@ -5,6 +5,7 @@ import logging
 import re
 import time
 from datetime import datetime
+from typing import List
 
 import requests
 from flask import Flask, request
@@ -41,6 +42,8 @@ def add_grids():
     """Solving the sudoku"""
     # Add grid to records.
     grids_to_return.grids.append(request.get_json())
+    if not isinstance(grids_to_return.grids[len(grids_to_return.grids) - 1]["Grid"], List):
+        raise TypeError(f"Grid is of invalid type")
     logging.debug(f"Received the grid {grids_to_return.grids[len(grids_to_return.grids) - 1]}")
     initial_grid = grids_to_return.grids[len(grids_to_return.grids) - 1]["Grid"]
     # Convert input to string.

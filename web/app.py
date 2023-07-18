@@ -54,6 +54,8 @@ def post():
     get_response = requests.get(f"http://{PROCESSOR_SERVER}:{PROCESSOR_PORT}/grids", timeout=10)
     # Return response.
     response = get_response.json()
+    if response is '':
+        raise SystemError('Unable to get info')
     logging.debug(f"Getting and returning response {get_response} from processor")
     return render_template('results.html', Title='Results', Second='Here are the results')\
         + render_template_string(response)

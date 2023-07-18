@@ -18,15 +18,6 @@ class Database:
         self._connection = sqlite3.connect(f'{self._full_path}.db', check_same_thread=False)
         self._cursor = self._connection.cursor()
 
-    def get_connection_status(self) -> bool:
-        """Return connection"""
-        cur = self._cursor
-        try:
-            if cur:
-                return True
-        except Exception as ex:
-            return False
-
     def show_all(self) -> str:
         """Printing all records"""
         self._cursor.execute(f"SELECT rowid, * FROM {self._database_name}")
@@ -45,8 +36,6 @@ class Database:
     # Add a new record to the table
     def add_one(self, solution: str, time: str, our_date: datetime):
         """Adding a record"""
-        if not self.get_connection_status():
-            raise sqlite3.OperationalError("Can't connect to table")
         logging.debug("%s, %s, %s", solution, time, our_date)
         self._cursor.execute(f"INSERT INTO {self._database_name} VALUES (?, ?, ?)", (solution, time, our_date))
         self._connection.commit()
@@ -58,7 +47,7 @@ class Database:
 
     def query_between_two_days(self, start_date: str, end_date: str) -> str:
         """Showing records between two dates"""
-        logging.debug("Received dates to query")
+        logging.debug(f"Received dates {start_date} and {end_date} to query")
         start = start_date.replace("T", " ")
         end = end_date.replace("T", " ")
         self._cursor.execute\
