@@ -43,7 +43,8 @@ def add_grids():
     # Add grid to records.
     grids_to_return.grids.append(request.get_json())
     if not isinstance(grids_to_return.grids[len(grids_to_return.grids) - 1]["Grid"], List):
-        raise TypeError(f"Grid is of invalid type")
+        our_object = grids_to_return.grids[len(grids_to_return.grids) - 1]["Grid"]
+        raise TypeError(f"Grid is of invalid type {type(our_object)}")
     logging.debug(f"Received the grid {grids_to_return.grids[len(grids_to_return.grids) - 1]}")
     initial_grid = grids_to_return.grids[len(grids_to_return.grids) - 1]["Grid"]
     # Convert input to string.

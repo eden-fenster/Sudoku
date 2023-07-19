@@ -38,11 +38,11 @@ def add_to_database():
     date = datetime.strptime(sudoku.responses[len(sudoku.responses) - 1]["Date"], '%Y-%m-%d %H:%M')
     # If of wrong type, raise value error.
     if not isinstance(solution, str):
-        raise ValueError(f"Variable {solution} is of wrong type")
+        raise ValueError(f"Variable {solution} is of wrong type {type(solution)}")
     if not isinstance(time, str):
-        raise ValueError(f"Variable {time} is of wrong type")
+        raise ValueError(f"Variable {time} is of wrong type {type(time)}")
     if not isinstance(date, datetime):
-        raise ValueError(f"Variable {date} is of wrong type")
+        raise ValueError(f"Variable {date} is of wrong type {type(date)}")
     # Adding to database
     logging.debug("Solution -> %s \n Time -> %s \n Date -> %s", solution, time, date)
     sudoku.database.add_one(solution=solution, time=time, our_date=date)
