@@ -5,8 +5,11 @@ import os
 import sqlite3
 
 # pylint: disable=invalid-name
+# pylint: disable=logging-fstring-interpolation
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+
+
 def create(directory: str, database_name: str):
     """Creating a database"""
     full_path = os.path.join(directory, database_name)
