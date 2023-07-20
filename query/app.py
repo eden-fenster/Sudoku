@@ -5,6 +5,7 @@ import logging
 
 import requests
 from flask import Flask, render_template, render_template_string, request
+
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 DATABASE_SERVER: str = "sudoku_database"
