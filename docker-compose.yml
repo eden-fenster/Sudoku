@@ -10,13 +10,12 @@ services:
       - "5000:5000"
     expose:
       - 5000
+    dns:
+      - 127.0.0.1
     container_name: sudoku_web
     hostname: sudoku_web
 #    networks:
 #      - my_network
-
-
-
 
   processor:
     build:
@@ -26,6 +25,8 @@ services:
       - "8000:8000"
     expose:
       - 8000
+    dns:
+      - 127.0.0.1
     container_name: sudoku_processor
     hostname: sudoku_processor
 
@@ -40,6 +41,8 @@ services:
       - "3000:3000"
     expose:
       - 3000
+    dns:
+      - 127.0.0.1
     container_name: sudoku_database
     hostname: sudoku_database
 
@@ -51,6 +54,8 @@ services:
       - "1000:1000"
     expose:
       - 1000
+    dns:
+      - 127.0.0.1
     container_name: sudoku_query
     hostname: sudoku_query
 
