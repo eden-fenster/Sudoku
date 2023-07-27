@@ -2,7 +2,7 @@
 """Sudoku Solver - Relevant methods"""
 import logging
 from typing import List
-from processor.new_sudoku_class import solved_puzzle
+from new_sudoku_class import solved_puzzle
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 

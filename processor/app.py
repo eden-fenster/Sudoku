@@ -9,8 +9,8 @@ from typing import List
 
 import requests
 from flask import Flask, request
-from processor import sudoku
-from processor.processor_storage import Storage
+import sudoku
+from processor_storage import Storage
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 

@@ -6,27 +6,32 @@ services:
     build:
       context: .
       dockerfile: web/Dockerfile
+    links:
+      - query:sudoku_query
+      - processor:sudoku_processor
     ports:
       - "5000:5000"
     expose:
       - 5000
     dns:
       - 127.0.0.1
+    network_mode: "bridge"
     container_name: sudoku_web
     hostname: sudoku_web
-#    networks:
-#      - my_network
 
   processor:
     build:
       context: .
       dockerfile: processor/Dockerfile
+    links:
+      - database:sudoku_database
     ports:
       - "8000:8000"
     expose:
       - 8000
     dns:
       - 127.0.0.1
+    network_mode: "bridge"
     container_name: sudoku_processor
     hostname: sudoku_processor
 
@@ -43,6 +48,7 @@ services:
       - 3000
     dns:
       - 127.0.0.1
+    network_mode: "bridge"
     container_name: sudoku_database
     hostname: sudoku_database
 
@@ -50,21 +56,25 @@ services:
     build:
       context: .
       dockerfile: query/Dockerfile
+    links:
+      - database:sudoku_database
     ports:
       - "1000:1000"
     expose:
       - 1000
     dns:
       - 127.0.0.1
+    network_mode: "bridge"
     container_name: sudoku_query
     hostname: sudoku_query
 
-networks:
-  my_network:
-    name: connect
-    driver: bridge
-    ipam:
-      config:
-        - gateway: 10.0.2.15
+#networks:
+#  my_network:
+#    name: connect
+#    driver: bridge
+#    ipam:
+#      config:
+#        - subnet: "172.18.0.0/16"
+#        - gateway: "172.18.0.1"
 
 

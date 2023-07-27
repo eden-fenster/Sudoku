@@ -6,6 +6,7 @@ WORKDIR /sudoku_web_directory
 
 ENV FLASK_APP=web/app.py
 ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLA
 
 COPY web/requirements.txt requirements.txt
 RUN apt-get update
