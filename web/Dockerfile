@@ -6,11 +6,11 @@ WORKDIR /sudoku_web_directory
 
 ENV FLASK_APP=web/app.py
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLA
 
 COPY web/requirements.txt requirements.txt
-RUN apt-get update
+RUN apt-get -y update
 RUN apt-get install inetutils-ping
+RUN apt-get -y install curl
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 

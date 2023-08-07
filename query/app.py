@@ -63,4 +63,4 @@ def return_all():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=1000, host='sudoku_query', ssl_context='adhoc')
+    app.run(debug=True, port=1000, host='sudoku_query')
