@@ -5,6 +5,7 @@ import logging
 
 import requests
 from flask import Flask, render_template, render_template_string, request
+
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 DATABASE_SERVER: str = "sudoku_database"
@@ -30,9 +31,9 @@ def return_queried():
     # Getting dates.
     start_date = request.form.get('startdate')
     end_date = request.form.get('enddate')
-    if not isinstance(start_date, datetime):
+    if not isinstance(start_date, str):
         raise ValueError(f"{start_date} is of invalid type {type(start_date)}")
-    if not isinstance(end_date, datetime):
+    if not isinstance(end_date, str):
         raise ValueError(f"{end_date} is of invalid type {type(end_date)}")
     logging.debug\
         ("Received dates\nThe start date is %s and the end date is %s", start_date, end_date)
@@ -62,4 +63,4 @@ def return_all():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=1000, host='sudoku_query', ssl_context='adhoc')
+    app.run(debug=True, port=1000, host='sudoku_query')
