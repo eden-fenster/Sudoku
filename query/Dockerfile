@@ -22,5 +22,6 @@ EXPOSE 1000
 COPY query/*.py /query_directory/query/
 COPY query/templates/*.html /query_directory/query/templates/
 COPY query/static/styles/*.css /query_directory/query/static/styles/
+COPY query/static/*.ico /query_directory/query/static/
 
 CMD ["flask", "run", "-p", "1000"]

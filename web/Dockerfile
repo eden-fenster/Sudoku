@@ -21,4 +21,6 @@ COPY web/*.py /sudoku_web_directory/web/
 COPY web/templates/*.html /sudoku_web_directory/web/templates/
 COPY web/static/styles/*.css /sudoku_web_directory/web/static/styles/
 COPY web/static/scripts/*.js /sudoku_web_directory/web/static/scripts/
+COPY web/static/*.ico /sudoku_web_directory/web/static/
+
 CMD ["flask", "run"]
