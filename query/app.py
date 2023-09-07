@@ -47,7 +47,7 @@ def return_queried():
         raise SystemError('Unable to get queried dates')
     logging.debug("Received queried dates back")
     return render_template('results.html', Title='Queried Database',
-                           Second='Here are the records between the two dates') \
+                           Second='Database Results') \
         + render_template_string(response.json())
 
 
