@@ -27,6 +27,7 @@ body {
    }
    form {
      color: white;
+     background-color: maroon;
      font-family: "Lucida Console", "Courier New", monospace;
      text-align: center;
      border-style: outset;

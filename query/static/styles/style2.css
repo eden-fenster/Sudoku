@@ -10,8 +10,11 @@ body {
    }
    script {
    color: white;
+   background-color: maroon;
    }
-
+   div {
+    background-color: maroon;
+   }
    h1 {
    color: white;
    margin-left: 0px;
